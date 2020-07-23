@@ -8,11 +8,9 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="stylesheet.css" />
+    <link rel="stylesheet" href="queries.css" />
     <link rel="shortcut icon" href="./../img/logo.png" type="image/png" />
-    <script
-      src="https://kit.fontawesome.com/010f6f666a.js"
-      crossorigin="anonymous"
-    ></script>
+
     <title>Innocent Ingabire</title>
   </head>
   <body>
@@ -30,16 +28,20 @@
             <img src="./../img/logo.png" alt="logo" />
           </div>
         </div>
-        <ul class="navbar">
+        <ul class="navbar js-main-nav">
           <li class="list-item"><a href="#" class="active">About Me</a></li>
           <li class="list-item"><a href="#">Portfolio</a></li>
           <li class="list-item"><a href="#">Books</a></li>
           <li class="list-item"><a href="#">Resume</a></li>
           <li class="list-item"><a href="#">Blog</a></li>
           <li class="list-item">
-            <a href="#" class="contact-me">Contact Me</a>
+            <a href="./../contact-page/index.html" class="contact-me"
+              >Contact Me</a
+            >
           </li>
         </ul>
+        <a class="mobile-nav-icon js-nav-icon"><i class="fas fa-bars"></i></a>
+        <!-- <i class="fas fa-times"></i> -->
       </header>
       <div class="body-content">
         <div class="moto">
@@ -107,5 +109,11 @@
         </p>
       </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/010f6f666a.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="script.js"></script>
   </body>
 </html>

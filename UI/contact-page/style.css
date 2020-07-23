@@ -1,3 +1,18 @@
+/*
+0 - 600px:      Phone
+600 - 900px:    Tablet portrait
+900 - 1200px:   Tablet landscape
+[1200 - 1800] is where our normal styles apply
+1800px + :      Big desktop
+
+$breakpoint arguement choices:
+- phone
+- tab-port
+- tab-land
+- big-desktop
+1em = 16px
+*/
+
 :root {
   --color-primary: #0bdbb6;
   --color-primary-light: #f9fffe;
@@ -57,6 +72,9 @@ body {
   height: 100%;
   display: flex;
   align-items: center;
+}
+.mobile-nav-icon {
+  display: none;
 }
 .list-item {
   list-style: none;
@@ -123,6 +141,14 @@ body {
   display: flex;
   flex-direction: column;
 }
+textarea {
+  margin-bottom: 0.9rem;
+  background: rgba(11, 219, 182, 0.02);
+  border: 2px solid rgba(112, 112, 112, 0.05);
+  box-sizing: border-box;
+  resize: none;
+  width: 80%;
+}
 input {
   height: 2rem;
   margin-bottom: 0.9rem;
@@ -130,12 +156,10 @@ input {
   border: 2px solid rgba(112, 112, 112, 0.05);
   box-sizing: border-box;
 }
-input::placeholder {
+input::placeholder,
+textarea::placeholder {
   padding-left: 0.8rem;
   color: rgba(112, 112, 112, 0.4);
-}
-input:nth-child(3) {
-  height: 5rem;
 }
 input:not(:last-child) {
   width: 80%;

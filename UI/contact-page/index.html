@@ -8,6 +8,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="queries.css" />
     <link rel="shortcut icon" href="./../img/logo.png" type="image/png" />
     <script
       src="https://kit.fontawesome.com/010f6f666a.js"
@@ -41,6 +42,7 @@
             <a href="#" class="contact-me">Contact Me</a>
           </li>
         </ul>
+        <a class="mobile-nav-icon js-nav-icon"><i class="fas fa-bars"></i></a>
       </header>
       <div class="body-content">
         <div class="moto">
@@ -65,7 +67,15 @@
           <form action="" class="contact-form">
             <input type="text" class="name-input" placeholder="Names" />
             <input type="email" class="email-input" placeholder="Email" />
-            <input type="text" class="message-input" placeholder="Message" />
+            <textarea
+              name="message"
+              id=""
+              cols="30"
+              rows="10"
+              placeholder="Message"
+              class="message-input"
+            ></textarea>
+
             <input type="button" value="SEND" />
           </form>
         </div>

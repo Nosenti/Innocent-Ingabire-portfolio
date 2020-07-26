@@ -1,0 +1,113 @@
+/*
+0 - 600px:      Phone
+600 - 900px:    Tablet portrait
+900 - 1200px:   Tablet landscape
+[1200 - 1800] is where our normal styles apply
+1800px + :      Big desktop
+
+$breakpoint arguement choices:
+- phone
+- tab-port
+- tab-land
+- big-desktop
+1em = 16px
+*/
+
+/* Tablet Landscape: from 900 to 1200px */
+@media only screen and (max-width: 1200px) {
+  .header {
+    padding-left: 1em;
+  }
+  .navbar {
+  }
+  .navbar > * {
+    padding: 0 1.5em;
+  }
+  .blog-description {
+    width: 85%;
+  }
+  .blog-desc-title {
+    font-size: 1.8rem;
+  }
+
+  /* Tablet portrait: from 600 to 900px */
+  @media only screen and (max-width: 900px) {
+    .body-container {
+      min-height: 100vh;
+    }
+
+    .blog-desc-title {
+      font-size: 1.5rem;
+    }
+
+    .blog-desc-paragraph {
+      font-size: 0.9rem;
+    }
+
+    .btns {
+      margin-top: 1.5em;
+      display: flex;
+      flex-direction: column;
+    }
+    .btn {
+      display: flex;
+      width: 60%;
+      justify-content: center;
+      margin-bottom: 1em;
+      margin-left: 3rem;
+    }
+    .more-info {
+      width: 98%;
+      padding-right: 0.8rem;
+      padding-top: 1rem;
+      text-align: left;
+      top: 90vh;
+      left: 5vw;
+    }
+    input:last-child {
+      width: 20%;
+      margin-left: 60%;
+      height: 2rem;
+      background-color: var(--color-primary);
+      color: white;
+    }
+    .blog-text {
+      font-size: 0.8rem;
+    }
+    .blog-pic {
+      width: 500px;
+    }
+    .read-more {
+      font-size: 0.8rem;
+    }
+    .navbar {
+      display: none;
+      /* flex-direction: column;
+    background-color: var(--color-primary);
+    height: 100vh;
+    width: 50%;
+    color: white; */
+    }
+    .blog-item a {
+      padding: 4% 5%;
+    }
+
+    .mobile-nav-icon {
+      float: right;
+      color: var(--color-primary);
+      font-size: 2rem;
+      cursor: pointer;
+      display: block;
+    }
+  }
+
+  /* phones: from 0 to 600px */
+  @media only screen and (max-width: 600px) {
+    .blog-description {
+      width: 90%;
+    }
+    .blog-desc-title {
+      font-size: 1.2rem;
+    }
+  }
+}

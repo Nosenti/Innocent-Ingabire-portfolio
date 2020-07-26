@@ -1,0 +1,37 @@
+/*
+0 - 600px:      Phone
+600 - 900px:    Tablet portrait
+900 - 1200px:   Tablet landscape
+[1200 - 1800] is where our normal styles apply
+1800px + :      Big desktop
+
+$breakpoint arguement choices:
+- phone
+- tab-port
+- tab-land
+- big-desktop
+1em = 16px
+*/
+
+/* Tablet Landscape: from 900 to 1200px */
+@media only screen and (max-width: 1200px) {
+  .innocent-big {
+    display: none;
+  }
+  .body-content {
+    width: 40%;
+  }
+}
+/* Tablet portrait: from 600 to 900px */
+@media only screen and (max-width: 900px) {
+  .body-content {
+    width: 50%;
+  }
+}
+
+/* phones: from 0 to 600px */
+@media only screen and (max-width: 600px) {
+  .body-content {
+    width: 60%;
+  }
+}

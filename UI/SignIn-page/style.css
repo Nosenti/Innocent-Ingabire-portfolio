@@ -1,0 +1,120 @@
+/*
+0 - 600px:      Phone
+600 - 900px:    Tablet portrait
+900 - 1200px:   Tablet landscape
+[1200 - 1800] is where our normal styles apply
+1800px + :      Big desktop
+
+$breakpoint arguement choices:
+- phone
+- tab-port
+- tab-land
+- big-desktop
+1em = 16px
+*/
+
+:root {
+  --color-primary: #0bdbb6;
+  --color-primary-light: #f9fffe;
+
+  --color-grey-light-1: #faf9f9;
+  --color-grey-light-2: #f4f2f2;
+  --color-grey-light-3: #f0eeee;
+  --color-grey-light-4: #ccc;
+
+  --color-grey-dark-1: #333;
+  --color-grey-dark-2: #777;
+  --color-grey-dark-3: #999;
+
+  --shadow-dark: 0 2rem 6rem rgba(0, 0, 0, 0.3);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Poppins", sans-serif;
+  /* 1rem = 10px; */
+  font-size: 62.5%;
+  line-height: 1.7;
+  font-weight: 400;
+}
+.body-container {
+  display: flex;
+  height: 100vh;
+  position: relative;
+  background-color: rgba(11, 219, 181, 0.1);
+  align-items: center;
+  justify-content: center;
+}
+.body-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  height: 80%;
+  margin-top: -20px;
+}
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+.profile-name {
+  color: var(--color-primary);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+.profile-photo {
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  margin-left: 20px;
+}
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.signin-form input {
+  height: 2rem;
+  margin-bottom: 0.9rem;
+  background: rgba(11, 219, 182, 0.02);
+  border: 2px solid var(--color-primary);
+
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+input:focus {
+  outline: none;
+}
+input::placeholder {
+  padding-left: 0.8rem;
+  color: rgba(112, 112, 112, 0.4);
+}
+
+input:last-child {
+  background-color: var(--color-primary);
+  color: white;
+}
+input:last-child:hover {
+  cursor: pointer;
+  color: var(--color-primary);
+  background-color: white;
+  border: 2px solid var(--color-primary);
+}
+.innocent-big {
+  position: absolute;
+  top: 58vh;
+  left: 47vw;
+  z-index: -1;
+}

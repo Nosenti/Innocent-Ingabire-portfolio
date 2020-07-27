@@ -52,6 +52,9 @@ $breakpoint arguement choices:
 }
 /* Tablet portrait: from 600 to 900px */
 @media only screen and (max-width: 900px) {
+  .mobile-navigation {
+    display: inline-block;
+  }
   .body-container {
     min-height: 100vh;
   }

@@ -19,9 +19,10 @@ $breakpoint arguement choices:
     padding-left: 1em;
   }
   .navbar {
+    font-size: 0.6rem;
   }
   .navbar > * {
-    padding: 0 1.5em;
+    padding: 0 1.2em;
   }
   .blog-description {
     width: 85%;
@@ -34,6 +35,9 @@ $breakpoint arguement choices:
   @media only screen and (max-width: 900px) {
     .body-container {
       min-height: 100vh;
+    }
+    .mobile-navigation {
+      display: inline-block;
     }
 
     .blog-desc-title {
@@ -49,6 +53,7 @@ $breakpoint arguement choices:
       display: flex;
       flex-direction: column;
     }
+
     .btn {
       display: flex;
       width: 60%;

@@ -18,44 +18,47 @@ $breakpoint arguement choices:
   .header {
     padding-left: 1em;
   }
-  .middle-section{
+  .middle-section {
     flex-direction: column;
   }
-  .subscribe-section{
+  .subscribe-section {
     margin-left: 20%;
   }
-  .subscribe-section >*{
+  .subscribe-section > * {
     width: 60%;
   }
-  .subscribe-title{
+  .subscribe-title {
     font-size: 0.7rem;
   }
   .navbar {
+    font-size: 0.6rem;
   }
   .navbar > * {
     padding: 0 1.5em;
   }
-  .blog-description{
+  .blog-description {
     width: 85%;
   }
-  .blog-desc-title{
+  .blog-desc-title {
     font-size: 1.8rem;
   }
-  
-
+}
 /* Tablet portrait: from 600 to 900px */
 @media only screen and (max-width: 900px) {
   .body-container {
     min-height: 100vh;
   }
-  
-  .blog-desc-title{
+  .mobile-navigation {
+    display: inline-block;
+  }
+
+  .blog-desc-title {
     font-size: 1.5rem;
   }
 
   .blog-desc-paragraph {
-  font-size: 0.9rem;
-}
+    font-size: 0.9rem;
+  }
 
   .btns {
     margin-top: 1.5em;
@@ -78,14 +81,14 @@ $breakpoint arguement choices:
     left: 5vw;
   }
 
-  .blog-text{
+  .blog-text {
     font-size: 0.8rem;
   }
-  .blog-pic{
+  .blog-pic {
     width: 500px;
   }
-  .read-more{
-    font-size: .8rem;
+  .read-more {
+    font-size: 0.8rem;
   }
   .navbar {
     display: none;
@@ -95,7 +98,7 @@ $breakpoint arguement choices:
     width: 50%;
     color: white; */
   }
-  .blog-item a{
+  .blog-item a {
     padding: 4% 5%;
   }
 
@@ -110,10 +113,10 @@ $breakpoint arguement choices:
 
 /* phones: from 0 to 600px */
 @media only screen and (max-width: 600px) {
-  .blog-description{
+  .blog-description {
     width: 90%;
   }
-  .blog-desc-title{
+  .blog-desc-title {
     font-size: 1.2rem;
   }
 }

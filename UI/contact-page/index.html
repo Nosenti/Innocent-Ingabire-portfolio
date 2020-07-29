@@ -115,11 +115,37 @@
             If you have an opportunity or an idea you think I might be
             interested in; contact me via the form below.
           </div>
-          <form action="" class="contact-form">
-            <input type="text" class="name-input" placeholder="Names" />
-            <input type="email" class="email-input" placeholder="Email" />
-            <input type="text" class="message-input" placeholder="Message" />
-            <input type="button" value="SEND" />
+          <form action="" class="contact-form" id="form">
+            <div class="form-control">
+              <input
+                type="text"
+                class="name-input"
+                placeholder="Names"
+                id="name"
+              />
+              <small>Error message</small>
+            </div>
+            <div class="form-control">
+              <input
+                type="text"
+                class="email-input"
+                placeholder="Email"
+                id="email"
+              />
+              <small>Error message</small>
+            </div>
+            <div class="form-control">
+              <textarea
+                rows="5"
+                type="text"
+                class="message-input"
+                placeholder="Message"
+                id="message"
+              ></textarea>
+              <small>Error message</small>
+            </div>
+
+            <button type="submit">SEND</button>
           </form>
         </div>
 
@@ -153,5 +179,6 @@
         </div>
       </div>
     </div>
+    <script src="script.js"></script>
   </body>
 </html>

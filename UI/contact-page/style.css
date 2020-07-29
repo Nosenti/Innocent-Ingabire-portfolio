@@ -11,6 +11,8 @@
   --color-grey-dark-2: #777;
   --color-grey-dark-3: #999;
 
+  --error-color: #e74c3c;
+
   --shadow-dark: 0 2rem 6rem rgba(0, 0, 0, 0.3);
 }
 
@@ -123,31 +125,67 @@ body {
   display: flex;
   flex-direction: column;
 }
-input {
-  height: 2rem;
+.form-control {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 0.9rem;
+}
+.form-control.error input {
+  border-color: var(--error-color);
+}
+.form-control.error textarea {
+  border-color: var(--error-color);
+}
+.form-control small {
+  color: var(--error-color);
+  visibility: hidden;
+}
+.form-control.error small {
+  visibility: visible;
+}
+textarea {
   background: rgba(11, 219, 182, 0.02);
   border: 2px solid rgba(112, 112, 112, 0.05);
   box-sizing: border-box;
+  width: 80%;
+  resize: none;
 }
+input {
+  height: 2rem;
+
+  background: rgba(11, 219, 182, 0.02);
+  border: 2px solid rgba(112, 112, 112, 0.05);
+  box-sizing: border-box;
+  width: 80%;
+  resize: none;
+}
+textarea::placeholder,
 input::placeholder {
   padding-left: 0.8rem;
   color: rgba(112, 112, 112, 0.4);
 }
-input:nth-child(3) {
-  height: 5rem;
-}
-input:not(:last-child) {
+input {
   width: 80%;
 }
-input:last-child {
+textarea:focus,
+input:focus {
+  outline: 0;
+  border-color: #777;
+}
+button {
   width: 20%;
   margin-left: 60%;
-  height: 3rem;
+  height: 2.5rem;
+  border-radius: 2px;
   background-color: var(--color-primary);
   color: white;
+  border: none;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
 }
-input:last-child:hover {
+button:hover {
   cursor: pointer;
   color: var(--color-primary);
   background-color: white;
@@ -444,4 +482,3 @@ span a {
   -ms-transform: rotate(-135deg);
   -o-transform: rotate(-135deg);
 }
-

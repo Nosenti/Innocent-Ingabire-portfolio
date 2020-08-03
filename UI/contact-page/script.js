@@ -45,17 +45,6 @@ function checkLength(input, min, max) {
   }
 }
 
-// Check required fields
-function checkRequired(inputArr) {
-  inputArr.forEach(function (input) {
-    if (input.value.trim() === "") {
-      showError(input, `${getFieldName(input)} is required`);
-    } else {
-      return true;
-    }
-  });
-}
-
 // Get fieldname
 function getFieldName(input) {
   return input.id.charAt(0).toUpperCase() + input.id.slice(1);
@@ -65,7 +54,7 @@ function getFieldName(input) {
 function checkEmail(input) {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if (re.test(input.value.trim())) {
-    return false;
+    return true;
   } else {
     showError(input, "Email is not valid");
   }
@@ -84,22 +73,24 @@ function saveMessages(name, email, message) {
 // Event listener
 form.addEventListener("submit", function (e) {
   e.preventDefault();
-  checkRequired([name, email, message]);
-  checkLength(name, 3, 40);
-  checkLength(message, 6, 1000);
-  checkEmail(email);
+  if (
+    // checkRequired([name, email, message]) &&
+    checkLength(name, 3, 40) &&
+    checkLength(message, 6, 1000) &&
+    checkEmail(email)
+  ) {
+    // save message to database
+    saveMessages(name.value, email.value, message.value);
 
-  // save message to database
-  saveMessages(name.value, email.value, message.value);
+    //display alert
+    document.querySelector(".alert").style.display = "block";
 
-  //display alert
-  document.querySelector(".alert").style.display = "block";
+    // Hide alert after 3 seconds
+    setTimeout(function () {
+      document.querySelector(".alert").style.display = "none";
+    }, 1500);
 
-  // Hide alert after 3 seconds
-  setTimeout(function () {
-    document.querySelector(".alert").style.display = "none";
-  }, 3000);
-
-  // Clear form
-  document.getElementById("form").reset();
+    // Clear form
+    document.getElementById("form").reset();
+  }
 });

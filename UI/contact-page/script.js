@@ -40,6 +40,8 @@ function checkLength(input, min, max) {
       input,
       `${getFieldName(input)} must be less than ${max} characters`
     );
+  } else {
+    return true;
   }
 }
 
@@ -48,6 +50,8 @@ function checkRequired(inputArr) {
   inputArr.forEach(function (input) {
     if (input.value.trim() === "") {
       showError(input, `${getFieldName(input)} is required`);
+    } else {
+      return true;
     }
   });
 }
@@ -75,6 +79,7 @@ function saveMessages(name, email, message) {
     message: message,
   });
 }
+// Elements validity
 
 // Event listener
 form.addEventListener("submit", function (e) {
@@ -83,5 +88,18 @@ form.addEventListener("submit", function (e) {
   checkLength(name, 3, 40);
   checkLength(message, 6, 1000);
   checkEmail(email);
+
+  // save message to database
   saveMessages(name.value, email.value, message.value);
+
+  //display alert
+  document.querySelector(".alert").style.display = "block";
+
+  // Hide alert after 3 seconds
+  setTimeout(function () {
+    document.querySelector(".alert").style.display = "none";
+  }, 3000);
+
+  // Clear form
+  document.getElementById("form").reset();
 });

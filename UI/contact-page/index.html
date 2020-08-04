@@ -108,6 +108,7 @@
           <div class="contact-intro">
             <h2>Contact</h2>
           </div>
+          <div class="alert">Your messsage has been sent</div>
           <div class="my-name">
             <h1 class="name">Innocent Ingabire</h1>
           </div>
@@ -115,11 +116,37 @@
             If you have an opportunity or an idea you think I might be
             interested in; contact me via the form below.
           </div>
-          <form action="" class="contact-form">
-            <input type="text" class="name-input" placeholder="Names" />
-            <input type="email" class="email-input" placeholder="Email" />
-            <input type="text" class="message-input" placeholder="Message" />
-            <input type="button" value="SEND" />
+          <form action="" class="contact-form" id="form">
+            <div class="form-control">
+              <input
+                type="text"
+                class="name-input"
+                placeholder="Names"
+                id="name"
+              />
+              <small>Error message</small>
+            </div>
+            <div class="form-control">
+              <input
+                type="text"
+                class="email-input"
+                placeholder="Email"
+                id="email"
+              />
+              <small>Error message</small>
+            </div>
+            <div class="form-control">
+              <textarea
+                rows="5"
+                type="text"
+                class="message-input"
+                placeholder="Message"
+                id="message"
+              ></textarea>
+              <small>Error message</small>
+            </div>
+
+            <button type="submit">SEND</button>
           </form>
         </div>
 
@@ -153,5 +180,14 @@
         </div>
       </div>
     </div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-database.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+             https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-analytics.js"></script>
+
+    <script src="script.js"></script>
   </body>
 </html>

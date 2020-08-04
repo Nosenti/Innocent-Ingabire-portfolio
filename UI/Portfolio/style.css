@@ -202,7 +202,7 @@ body {
   left: 47vw;
 }
 
-.mobile-nav-icon {
+.mobile-navigation {
   display: none;
 }
 .list-item {
@@ -491,4 +491,3 @@ body {
   -ms-transform: rotate(-135deg);
   -o-transform: rotate(-135deg);
 }
-

@@ -46,7 +46,9 @@ $breakpoint arguement choices:
       padding-right: 7%;
       flex: 0 0 80%;
     }
-
+    .mobile-navigation {
+      display: inline;
+    }
     .category {
       flex-direction: column;
     }

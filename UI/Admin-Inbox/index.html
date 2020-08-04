@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="queries.css" />
+    <link rel="shortcut icon" href="./../img/logo.png" type="image/png" />
+    <script
+      src="https://kit.fontawesome.com/010f6f666a.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Innocent Ingabire</title>
+  </head>
+
+  <body>
+    <div class="body-container">
+      <header class="header">
+        <div class="logo-box">
+          <div class="logo">
+            <img src="./../img/logo.png" alt="logo" />
+          </div>
+        </div>
+        <ul class="navbar">
+          <div class="dropdown-btn">
+            <button class="dropbtn" onclick="myFunction()">
+              <h4>Admin</h4>
+
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content" id="myDropdown">
+              <a href="#">Profile</a>
+              <a href="#">Inbox</a>
+              <a href="#">Sign out</a>
+            </div>
+          </div>
+          <div class="dropdown-btn">
+            <button class="dropbtn" onclick="myFunction2()">
+              <i class="fas fa-bell"></i>
+              <h4>5</h4>
+            </button>
+            <div class="dropdown-content" id="myDropdown1">
+              <a href="#">You have a new text message</a>
+              <a href="#">2+ people subscribed</a>
+              <a href="#">1 perscon commented on your post</a>
+            </div>
+          </div>
+        </ul>
+      </header>
+
+      <div class="body-content">
+        <div class="sidebar">
+          <div class="search-messages">
+            <input
+              type="text"
+              class="search-messages"
+              placeholder="Search Messages"
+            />
+          </div>
+          <div class="messages-wrapper">
+            <div class="sort-dropdown">
+              <p>Sort by <i class="fa fa-caret-down"></i></p>
+            </div>
+            <div class="messages-container">
+              <div class="message-inbox">
+                <a href="#">
+                  <div class="message-inbox__title">
+                    <p>New Photo Pack</p>
+                  </div>
+                  <div class="message-inbox__body">
+                    <p>
+                      Our new Photo pack is now available to go live and we
+                      could not be more excited
+                    </p>
+                  </div>
+                  <div class="message-inbox__details">
+                    <div class="sender-name">
+                      <p>Danielle Jones,</p>
+                    </div>
+                    <div class="received-time">
+                      <p>3 min ago</p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <!-- inbox 2 -->
+              <div class="message-inbox">
+                <a href="#">
+                  <div class="message-inbox__title">
+                    <p>New Photo Pack</p>
+                  </div>
+                  <div class="message-inbox__body">
+                    <p>
+                      Our new Photo pack is now available to go live and we
+                      could not be more excited
+                    </p>
+                  </div>
+                  <div class="message-inbox__details">
+                    <div class="sender-name">
+                      <p>Danielle Jones,</p>
+                    </div>
+                    <div class="received-time">
+                      <p>3 min ago</p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="main-section">
+          <div class="main-section-wrapper">
+            <div class="sender-message">
+              <div class="sender-message__top">
+                <div class="sender-details">
+                  <div class="sender-name">
+                    <p>Xender Cage</p>
+                  </div>
+                  <div class="sender-email">
+                    <p>sender@test.com</p>
+                  </div>
+                </div>
+                <div class="message-info">
+                  <div class="received-date">
+                    <p>March 14, 2020</p>
+                  </div>
+                  <div class="received-time">
+                    <p>14:35</p>
+                  </div>
+                </div>
+              </div>
+              <div class="message-body">
+                <p>
+                  Dear John, <br /><br />Dolor posuere proin blandit accumsan
+                  senectus netus nullam curae, ornare laoreet adipiscing luctus
+                  mauris adipiscing pretium eget fermentum, tristique lobortis
+                  est ut metus lobortis tortor tincidunt himenaeos habitant quis
+                  dictumst proin odio sagittis purus mi, nec taciti vestibulum
+                  quis in sit varius lorem sit metus mi.<br /><br />
+                  Best Regards, <br /><br />Sara
+                </p>
+              </div>
+            </div>
+            <div class="reply-wrapper">
+              <textarea
+                rows="15"
+                type="text"
+                class="message-input"
+                placeholder="Type a reply"
+                id="message-body"
+              ></textarea>
+              <button type="submit" value="submit">Send Message</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <p>Innocent Ingabire &copy; 2020</p>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

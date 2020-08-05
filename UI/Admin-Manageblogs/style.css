@@ -11,6 +11,8 @@
   --color-grey-dark-2: #777;
   --color-grey-dark-3: #999;
 
+  --error-color: #e74c3c;
+
   --shadow-dark: 0 2rem 6rem rgba(0, 0, 0, 0.3);
 }
 
@@ -215,11 +217,20 @@ table.list thead > tr {
 .form-control {
   display: flex;
   flex-direction: column;
-}
-.form-control {
-  display: flex;
-  flex-direction: column;
   margin-bottom: 0.9rem;
+}
+.form-control.error input {
+  border-color: var(--error-color);
+}
+.form-control.error textarea {
+  border-color: var(--error-color);
+}
+.form-control small {
+  color: var(--error-color);
+  visibility: hidden;
+}
+.form-control.error small {
+  visibility: visible;
 }
 textarea {
   border: 2px solid rgba(112, 112, 112, 0.05);
@@ -274,4 +285,11 @@ form button:hover {
 }
 label {
   font-size: 1rem;
+}
+.alert {
+  text-align: center;
+  background-color: #79c879;
+  color: white;
+  padding: 5px 0;
+  display: none;
 }

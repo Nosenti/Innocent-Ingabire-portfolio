@@ -70,6 +70,7 @@ var blogsRef = firebase.database().ref("blogs");
 
 const form = document.getElementById("form");
 const title = document.getElementById("title");
+const avatar = document.getElementById("avatar");
 const message = document.getElementById("message-body");
 
 // Show input error message
@@ -112,11 +113,12 @@ function checkEmail(input) {
   }
 }
 
-function saveBlogs(title, message) {
+function saveBlogs(title, message, avatar) {
   var newBlogRef = blogsRef.push();
   newBlogRef.set({
     title: title,
     message: message,
+    avatar: avatar,
   });
 }
 // Elements validity
@@ -130,7 +132,7 @@ form.addEventListener("submit", function (e) {
     checkLength(message, 6, 4000)
   ) {
     // save message to database
-    saveBlogs(title.value, message.value);
+    saveBlogs(title.value, message.value, avatar.value);
 
     //display alert
     document.querySelector(".alert").style.display = "block";

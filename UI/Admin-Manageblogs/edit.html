@@ -8,7 +8,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="queries.css" />
+
     <link rel="shortcut icon" href="./../img/logo.png" type="image/png" />
     <script
       src="https://kit.fontawesome.com/010f6f666a.js"
@@ -100,7 +100,9 @@
                     ></textarea>
                   </div>
 
-                  <button type="submit" value="submit">Save Changes</button>
+                  <button type="submit" value="submit" id="edit-btn">
+                    Save Changes
+                  </button>
                 </form>
               </div>
             </div>
@@ -111,6 +113,14 @@
         <p>Innocent Ingabire &copy; 2020</p>
       </div>
     </div>
-    <script src="script.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-database.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+                                   https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-analytics.js"></script>
+
+    <script src="edit.js"></script>
   </body>
 </html>

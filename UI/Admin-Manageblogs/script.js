@@ -114,8 +114,8 @@ function checkEmail(input) {
 }
 
 function saveBlogs(title, message, avatar) {
-  var newBlogRef = blogsRef.push();
-  newBlogRef.set({
+  var autoID = blogsRef.push().key;
+  blogsRef.child(autoID).set({
     title: title,
     message: message,
     avatar: avatar,

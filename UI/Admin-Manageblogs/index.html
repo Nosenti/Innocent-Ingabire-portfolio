@@ -13,6 +13,7 @@
       src="https://kit.fontawesome.com/010f6f666a.js"
       crossorigin="anonymous"
     ></script>
+
     <title>Innocent Ingabire</title>
   </head>
 
@@ -77,16 +78,14 @@
                 <input type="text" class="search" placeholder="Search blogs" />
               </div>
               <div class="table">
-                <table class="list" id="employeeList">
-                  <thead>
-                    <tr>
-                      <th>Number</th>
-                      <th>Title</th>
-                      <th>Category</th>
-                      <th>Published</th>
-                      <th>Actions</th>
-                    </tr>
-                  </thead>
+                <table class="list" id="blogsList">
+                  <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Published</th>
+                    <th>Actions</th>
+                  </tr>
                   <tbody></tbody>
                 </table>
               </div>
@@ -101,6 +100,14 @@
         <p>Innocent Ingabire &copy; 2020</p>
       </div>
     </div>
-    <script src="script.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-database.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+                           https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-analytics.js"></script>
+
+    <script src="readblogs.js"></script>
   </body>
 </html>

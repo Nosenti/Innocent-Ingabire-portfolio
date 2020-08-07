@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <link rel="shortcut icon" href="./../img/logo.png" type="image/png" />
+    <script
+      src="https://kit.fontawesome.com/010f6f666a.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Innocent Ingabire</title>
+  </head>
+
+  <body>
+    <div class="body-container">
+      <header class="header">
+        <div class="logo-box">
+          <div class="logo">
+            <img src="./../img/logo.png" alt="logo" />
+          </div>
+        </div>
+        <ul class="navbar">
+          <div class="dropdown-btn">
+            <button class="dropbtn" onclick="myFunction()">
+              <h4>Admin</h4>
+
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content" id="myDropdown">
+              <a href="#">Profile</a>
+              <a href="./../Admin-Inbox/index.html">Inbox</a>
+              <a href="#">Sign out</a>
+            </div>
+          </div>
+          <div class="dropdown-btn">
+            <button class="dropbtn" onclick="myFunction2()">
+              <i class="fas fa-bell"></i>
+              <h4>5</h4>
+            </button>
+            <div class="dropdown-content" id="myDropdown1">
+              <a href="#">You have a new text message</a>
+              <a href="#">2+ people subscribed</a>
+              <a href="#">1 perscon commented on your post</a>
+            </div>
+          </div>
+        </ul>
+      </header>
+
+      <div class="body-content">
+        <div class="top-content-section">
+          <h2>Edit a blog post</h2>
+        </div>
+        <div class="main-section">
+          <div class="main-section-content">
+            <div class="table-wrapper">
+              <div class="posts-wrapper">
+                <i class="fas fa-arrow-left"></i> Manage Posts
+              </div>
+              <div class="form-manager">
+                <form
+                  onsubmit="event.preventDefault();onFormSubmit();"
+                  autocomplete="off"
+                  action=""
+                  class="contact-form"
+                  id="form"
+                >
+                  <div class="form-control">
+                    <label for="">Title</label>
+                    <input
+                      type="text"
+                      class="name-input"
+                      placeholder="Title of the blog"
+                      id="title"
+                    />
+                  </div>
+                  <div class="form-control">
+                    <label for="avatar">Featured Image</label>
+
+                    <input
+                      type="file"
+                      id="avatar"
+                      name="avatar"
+                      accept="image/png, image/jpeg"
+                    />
+                  </div>
+                  <div class="form-control">
+                    <label for="">Body</label>
+                    <textarea
+                      rows="15"
+                      type="text"
+                      class="message-input"
+                      placeholder="Body"
+                      id="message-body"
+                    ></textarea>
+                  </div>
+
+                  <button type="submit" value="submit" id="edit-btn">
+                    Save Changes
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <p>Innocent Ingabire &copy; 2020</p>
+      </div>
+    </div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-database.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+                                   https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-analytics.js"></script>
+
+    <script src="edit.js"></script>
+  </body>
+</html>

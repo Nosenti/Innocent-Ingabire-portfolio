@@ -40,7 +40,7 @@
               >
             </li>
             <li class="list-item">
-              <a href="./../Blog-Page-Admin/index.html">Blog</a>
+              <a href="#">Blog</a>
             </li>
             <li class="list-item">
               <a href="./../contact-page/index.html" class="contact-me"
@@ -230,10 +230,28 @@
             <div class="subscribe-title">
               <h2>Get the latest from my blog to your inbox</h2>
             </div>
-            <form action="" class="subscribe-form">
-              <input type="text" class="name-input" placeholder="Your name" />
-              <input type="email" class="name-input" placeholder="Email" />
-              <input type="button" value="SUBSCRIBE" />
+            <div class="alert">Subscription has been a success</div>
+            <form action="" class="subscribe-form" id="form">
+              <div class="form-control">
+                <input
+                  type="text"
+                  class="name-input"
+                  placeholder="Your name"
+                  id="name"
+                />
+                <small>Error message</small>
+              </div>
+              <div class="form-control">
+                <input
+                  type="email"
+                  class="name-input"
+                  placeholder="Email"
+                  id="email"
+                />
+                <small>Error message</small>
+              </div>
+
+              <button type="submit">SUBSCRIBE</button>
             </form>
           </div>
         </div>
@@ -242,5 +260,13 @@
         <p>Innocent Ingabire &copy; 2020</p>
       </div>
     </div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-database.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+                 https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-analytics.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

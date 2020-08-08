@@ -317,3 +317,7 @@ label {
   color: var(--color-primary);
   font-size: 1rem;
 }
+.posts-wrapper a {
+  color: var(--color-primary);
+  text-decoration: none;
+}

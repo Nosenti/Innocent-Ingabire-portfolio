@@ -39,9 +39,11 @@ window.onclick = function (e) {
     }
   }
 };
-
+/**
+ * Initiate fetching
+ */
+let postId;
 var blogsRef = firebase.database().ref("blogs");
-blogsRef.on("value", getData);
 
 const updateBtn = document.getElementById("edit-btn");
 const form = document.getElementById("form");
@@ -49,6 +51,9 @@ const title = document.getElementById("title");
 const avatar = document.getElementById("avatar");
 const message = document.getElementById("message-body");
 
+/**
+ * Listens to blog save edits and saves them
+ */
 updateBtn.addEventListener("click", (e) => {
   e.preventDefault();
   const newData = {
@@ -57,25 +62,44 @@ updateBtn.addEventListener("click", (e) => {
     avatar: avatar.value,
   };
   console.log(newData);
-  blogsRef.child(key).update(newData);
+  blogsRef.child(postId).update(newData);
 });
-function populateInputs(title, avatar, message) {
-  title.innerHTML = title;
-  avatar.innerHTML = avatar;
-  message.innerHTML = message;
+/**
+ * Takes fetched data and populates them to inputs
+ * @param {*} title
+ * @param {*} avatar
+ * @param {*} message
+ */
+function populateInputs(_title, _avatar, _message) {
+  title.value = _title;
+  avatar.value = _avatar;
+  message.value = _message;
 }
 
+/**
+ * Fetch data for a specific post
+ * And populte them to their respective inputs
+ * @param {*} data
+ */
 function getData(data) {
-  blogs = data.val();
-  var keys = Object.keys(blogs);
+  data = data.val();
+  data = data[postId];
+  console.log("Got ", data);
 
-  for (var i = 0; i < keys.length; i++) {
-    var key = keys[i];
-    // Look at each fruit object!
-    var titleValue = blogs[key].title;
-    var avatarValue = blogs[key].avatar;
-    var messageValue = blogs[key].message;
-    populateInputs(titleValue, avatarValue, messageValue);
-    console.log(titleValue, messageValue);
-  }
+  // Look at each fruit object!
+  var titleValue = data.title;
+  var avatarValue = data.avatar;
+  var messageValue = data.message;
+  populateInputs(titleValue, avatarValue, messageValue);
+  console.log(titleValue, messageValue);
 }
+
+/**
+ * Window on load
+ * We retrieve the id of the post that we should fetch
+ *
+ */
+window.onload = (e) => {
+  postId = window.location.href.slice(window.location.href.search("#") + 1);
+  blogsRef.orderByKey().equalTo(postId).on("value", getData);
+};

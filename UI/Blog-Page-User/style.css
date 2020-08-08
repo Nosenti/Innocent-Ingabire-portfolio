@@ -305,7 +305,7 @@ button:hover {
   display: flex;
   justify-content: space-between;
 }
-.read-more {
+.read-more a {
   color: var(--color-primary);
   font-size: 1rem;
   padding-top: 1rem;
@@ -502,4 +502,70 @@ button:hover {
   padding: 5px 0;
   display: none;
   margin-bottom: 5px;
+}
+
+/*comment section*/
+.comment-section {
+  display: flex;
+  flex-direction: column;
+}
+.leave-comment {
+  padding-top: 1rem;
+  height: 30px;
+  width: 20%;
+  margin-bottom: 1rem;
+}
+.comments-wrapper {
+  margin-top: 1.5rem;
+}
+.comment {
+  display: flex;
+}
+
+.avatar {
+  font-size: 3rem;
+  color: var(--color-primary);
+  margin-right: 1rem;
+}
+.comment-box {
+  display: flex;
+  flex-direction: column;
+}
+.comment-box__top {
+  display: flex;
+  justify-content: space-between;
+}
+.commentor-name {
+  font-size: 1rem;
+  color: var(--color-primary);
+}
+.comment-date {
+  padding-right: 1.5rem;
+}
+.comment-paragraph {
+  font-size: 0.8rem;
+}
+.comment-form {
+  margin-top: 1.2rem;
+  width: 60%;
+  display: none;
+}
+.comment-form input {
+  background-color: white;
+  border-color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+.comment-form textarea {
+  border: 2px solid var(--color-primary);
+  box-sizing: border-box;
+  resize: none;
+  width: 100%;
+}
+
+.comment-form textarea::placeholder {
+  padding-left: 0.8rem;
+  color: rgba(112, 112, 112, 0.4);
+}
+.comment-form button {
+  width: 20%;
 }

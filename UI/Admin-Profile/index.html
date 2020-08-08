@@ -13,6 +13,7 @@
       src="https://kit.fontawesome.com/010f6f666a.js"
       crossorigin="anonymous"
     ></script>
+
     <title>Innocent Ingabire</title>
   </head>
 
@@ -52,55 +53,20 @@
       </header>
 
       <div class="body-content">
-        <div class="top-content-section">
-          <h2>Write a blog post</h2>
-        </div>
-        <div class="main-section">
-          <div class="main-section-content">
-            <div class="table-wrapper">
-              <div class="posts-wrapper">
-                <a href="./index.html">
-                  <i class="fas fa-arrow-left"></i> Manage Posts
-                </a>
-              </div>
-              <div class="form-manager">
-                <div class="alert">Your blog post is successfully sent</div>
-                <form action="" class="contact-form" id="form">
-                  <div class="form-control">
-                    <label for="">Title</label>
-                    <input
-                      type="text"
-                      class="name-input"
-                      placeholder="Title of the blog"
-                      id="title"
-                    />
-                    <small>Error message</small>
-                  </div>
-                  <div class="form-control">
-                    <label for="avatar">Featured Image</label>
-
-                    <input
-                      type="file"
-                      id="avatar"
-                      name="avatar"
-                      accept="image/png, image/jpeg"
-                    />
-                  </div>
-                  <div class="form-control">
-                    <label for="">Body</label>
-                    <textarea
-                      rows="15"
-                      type="text"
-                      class="message-input"
-                      placeholder="Body"
-                      id="message-body"
-                    ></textarea>
-                    <small>Error message</small>
-                  </div>
-
-                  <button type="submit" value="submit">Create Post</button>
-                </form>
-              </div>
+        <div class="top-section">
+          <div class="profile-section">
+            <div class="profile-avatar">
+              <img
+                class="profile-photo"
+                src="./../img/passport-photo.jpg "
+                alt="profile picture "
+              />
+            </div>
+            <div class="profile-name">
+              <h2>Innocent Ingabire</h2>
+            </div>
+            <div class="edit-button">
+              <button>Edit Profile</button>
             </div>
           </div>
         </div>
@@ -114,8 +80,9 @@
     <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-database.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
-                     https://firebase.google.com/docs/web/setup#available-libraries -->
+                           https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-analytics.js"></script>
+
     <script src="script.js"></script>
   </body>
 </html>

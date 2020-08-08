@@ -45,9 +45,9 @@ window.onclick = function (e) {
 var blogsRef = firebase.database().ref("blogs");
 
 blogsRef.on("value", getData);
-
+var deleteB;
 function insertNewRecord(title, key) {
-  var deleteB = document.createElement("deleteB");
+  deleteB = document.createElement("a");
   var editB = document.createElement("a");
   var i = document.createElement("i");
   var j = document.createElement("j");
@@ -57,7 +57,7 @@ function insertNewRecord(title, key) {
 
   editB.appendChild(j);
   deleteB.appendChild(i);
-  editB.href = "edit.html";
+  editB.href = `edit.html#${key}`;
   var table = document
     .getElementById("blogsList")
     .getElementsByTagName("tbody")[0];
@@ -72,23 +72,28 @@ function insertNewRecord(title, key) {
   cell4.innerHTML = "Hello";
   cell5 = newRow.insertCell(4);
   // cell5.innerHTML = `<a href="#"onClick="onEdit(this)"><i class="fas fa-edit"></i></a>
-  //                      <a onClick="onDelete(${key})" ><i class="far fa-trash-alt"></i></a>`;
+  //                      <a onClick="onDelete(this)" ><i class="far fa-trash-alt"></i></a>`;
   cell5.appendChild(editB);
   cell5.appendChild(deleteB);
   deleteB.addEventListener("click", function (e) {
-    e.preventDefault();
-    blogsRef.child(key).remove();
+    e.stopPropagation();
+    onDelete(key);
   });
 }
-
-var blogs = null;
+function onDelete(key) {
+  blogsRef.child(key).remove();
+}
 function onEdit() {}
-var id = blogsRef.push().getKey();
 
+/**
+ * if I get data from Firebase
+ * I delete all other entries from the table
+ * @param {*} data
+ */
 function getData(data) {
   blogs = data.val();
   var keys = Object.keys(blogs);
-
+  clearTable();
   for (var i = 0; i < keys.length; i++) {
     var key = keys[i];
     // Look at each fruit object!
@@ -97,3 +102,12 @@ function getData(data) {
     insertNewRecord(title, key);
   }
 }
+
+/**
+ * Clear the table
+ */
+const clearTable = () => {
+  table = document.getElementById("blogsList");
+  let oldBody = table.querySelector("tbody");
+  oldBody.innerHTML = "";
+};

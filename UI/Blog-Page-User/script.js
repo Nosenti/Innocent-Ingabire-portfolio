@@ -18,6 +18,16 @@ var subscribersRef = firebase.database().ref("subscribers");
 const form = document.getElementById("form");
 const email = document.getElementById("email");
 const name = document.getElementById("name");
+var commentForm = document.querySelector(".comment-form");
+const leaveComment = document.getElementById("leave-comment-btn");
+
+leaveComment.addEventListener("click", () => {
+  if (commentForm.style.display === "none") {
+    commentForm.style.display = "inline-block";
+  } else {
+    commentForm.style.display = "none";
+  }
+});
 
 // Show input error message
 function showError(input, message) {

@@ -118,3 +118,13 @@ input:last-child:hover {
   left: 47vw;
   z-index: -1;
 }
+.login-user {
+  position: absolute;
+  top: 90vh;
+  left: 5vw;
+  font-size: 0.8rem;
+}
+
+span a {
+  color: var(--color-primary);
+}

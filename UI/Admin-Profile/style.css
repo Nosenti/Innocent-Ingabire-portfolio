@@ -179,3 +179,78 @@ body {
   color: var(--color-primary);
   font-size: 1rem;
 }
+.main-section {
+  background-color: #bbbcbe1e;
+  min-height: 60vh;
+}
+.top-cards {
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+.blog-card,
+.blog-card a {
+  width: 15vw;
+  height: 30vh;
+  background-color: white;
+  margin-right: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.blog-card a {
+  text-decoration: none;
+}
+.card-status {
+  font-size: 1.2rem;
+  color: var(--color-grey-dark-1);
+}
+.card-description {
+  font-size: 1rem;
+  color: var(--color-grey-dark-3);
+}
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: 5px;
+  color: var(--color-primary);
+}
+.content-section {
+  width: 100%;
+  min-height: 700px;
+  position: relative;
+  padding: 20px auto;
+  align-content: center;
+}
+.content-section span {
+  font-weight: bold;
+  font-size: 0.8rem;
+  padding: 0 10px;
+  color: var(--color-primary);
+  cursor: pointer;
+  width: 100px;
+  display: inline-block;
+}
+.content-section__btn {
+  display: inline-block;
+}
+
+.section-wrapper {
+  max-width: 20%;
+  padding: 0 20px;
+  position: absolute;
+  top: 130px;
+  overflow: hidden;
+}
+#subscription-section {
+  display: none;
+}
+
+#indicator {
+  width: 100px;
+  border: none;
+  background-color: var(--color-primary);
+  height: 3px;
+  margin-top: 8px;
+}

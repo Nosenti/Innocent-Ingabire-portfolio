@@ -39,3 +39,20 @@ window.onclick = function (e) {
     }
   }
 };
+
+// js toggle sections
+
+var profileSection = document.getElementById("profile-section");
+var subscriptionSection = document.getElementById("subscription-section");
+var indicator = document.getElementById("indicator");
+
+function loadProfile() {
+  profileSection.style.display = "block";
+  subscriptionSection.style.display = "none";
+  indicator.style.transform = "translateX(0px)";
+}
+function loadSubscribers() {
+  profileSection.style.display = "none";
+  subscriptionSection.style.display = "block";
+  indicator.style.transform = "translateX(100px)";
+}

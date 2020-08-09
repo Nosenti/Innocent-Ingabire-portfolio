@@ -46,7 +46,7 @@ var blogsRef = firebase.database().ref("blogs");
 
 blogsRef.on("value", getData);
 var deleteB;
-function insertNewRecord(title, key) {
+function insertNewRecord(title, key, date) {
   deleteB = document.createElement("a");
   var editB = document.createElement("a");
   var i = document.createElement("i");
@@ -69,7 +69,7 @@ function insertNewRecord(title, key) {
   cell3 = newRow.insertCell(2);
   cell3.innerHTML = "Hello";
   cell4 = newRow.insertCell(3);
-  cell4.innerHTML = "Hello";
+  cell4.innerHTML = date;
   cell5 = newRow.insertCell(4);
   // cell5.innerHTML = `<a href="#"onClick="onEdit(this)"><i class="fas fa-edit"></i></a>
   //                      <a onClick="onDelete(this)" ><i class="far fa-trash-alt"></i></a>`;
@@ -99,7 +99,8 @@ function getData(data) {
     // Look at each fruit object!
     var title = blogs[key].title;
     var message = blogs[key].message;
-    insertNewRecord(title, key);
+    var date = blogs[key].date;
+    insertNewRecord(title, key, date);
   }
 }
 

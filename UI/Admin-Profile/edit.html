@@ -8,12 +8,12 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
-
     <link rel="shortcut icon" href="./../img/logo.png" type="image/png" />
     <script
       src="https://kit.fontawesome.com/010f6f666a.js"
       crossorigin="anonymous"
     ></script>
+
     <title>Innocent Ingabire</title>
   </head>
 
@@ -36,7 +36,7 @@
               <a href="#">Profile</a>
               <a href="./../Admin-Manageblogs/index.html">Blog</a>
               <a href="./../Admin-Inbox/index.html">Inbox</a>
-              <a href="#" id="signout">Sign out</a>
+              <a href="#">Sign out</a>
             </div>
           </div>
           <div class="dropdown-btn">
@@ -54,59 +54,46 @@
       </header>
 
       <div class="body-content">
-        <div class="top-content-section">
-          <h2>Edit a blog post</h2>
+        <div class="top-section">
+          <div class="profile-section">
+            <div class="profile-avatar">
+              <img
+                class="profile-photo"
+                src="./../img/passport-photo.jpg "
+                alt="profile picture "
+              />
+            </div>
+            <div class="profile-name">
+              <h2>Innocent Ingabire</h2>
+            </div>
+            <div class="edit-button">
+              <button>Back to Profile</button>
+            </div>
+          </div>
         </div>
-        <div class="main-section">
-          <div class="main-section-content">
-            <div class="table-wrapper">
-              <div class="posts-wrapper">
-                <i class="fas fa-arrow-left"></i> Manage Posts
-              </div>
-              <div class="form-manager">
-                <form
-                  onsubmit="event.preventDefault();onFormSubmit();"
-                  autocomplete="off"
-                  action=""
-                  class="contact-form"
-                  id="form"
-                >
-                  <div class="form-control">
-                    <label for="">Title</label>
-                    <input
-                      type="text"
-                      class="name-input"
-                      placeholder="Title of the blog"
-                      id="title"
-                    />
-                  </div>
-                  <div class="form-control">
-                    <label for="avatar">Featured Image</label>
-
-                    <input
-                      type="file"
-                      id="avatar"
-                      name="avatar"
-                      accept="image/png, image/jpeg"
-                    />
-                  </div>
-                  <div class="form-control">
-                    <label for="">Body</label>
-                    <textarea
-                      rows="15"
-                      type="text"
-                      class="message-input"
-                      placeholder="Body"
-                      id="message-body"
-                    ></textarea>
-                  </div>
-
-                  <button type="submit" value="submit" id="edit-btn">
-                    Save Changes
-                  </button>
-                </form>
+        <div class="main-section edit_main">
+          <div class="edit-form">
+            <div class="user-profile__header">
+              <div class="avatar"></div>
+              <div class="user-profile__header-title">
+                <h2>User Profile</h2>
               </div>
             </div>
+            <form action="">
+              <div class="form-control">
+                <label for="">Name</label>
+                <input type="text" />
+              </div>
+              <div class="form-control">
+                <label for="">Email</label>
+                <input type="text" />
+              </div>
+              <div class="form-control">
+                <label for="">Address</label>
+                <input type="text" />
+              </div>
+              <button type="submit" value="submit">Save Changes</button>
+            </form>
           </div>
         </div>
       </div>
@@ -119,9 +106,9 @@
     <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-database.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
-                                   https://firebase.google.com/docs/web/setup#available-libraries -->
+                           https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-analytics.js"></script>
 
-    <script src="edit.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

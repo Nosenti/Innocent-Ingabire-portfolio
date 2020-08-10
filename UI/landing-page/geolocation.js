@@ -16,12 +16,24 @@ firebase.analytics();
 var geolocationRef = firebase.database().ref("geolocation");
 if ("geolocation" in navigator) {
   // check if geolocation is supported/enabled on current browser
+
   navigator.geolocation.getCurrentPosition(
     function success(position) {
       // for when getting location is a success
       var latitude = position.coords.latitude;
       var longitude = position.coords.longitude;
-      console.log("latitude", latitude, "longitude", longitude);
+
+      var loc = confirm("This site wants to know your location");
+      if (loc == true) {
+        var autoID = geolocationRef.push().key;
+        geolocationRef.child(autoID).set({
+          latitude: latitude,
+          longitude: longitude,
+        });
+        console.log("latitude", latitude, "longitude", longitude);
+      } else {
+        console.log("Location access denied");
+      }
     },
     function error(error_message) {
       // for when getting location results in an error
@@ -37,13 +49,13 @@ if ("geolocation" in navigator) {
   console.log("geolocation is not enabled on this browser");
 }
 
-window.onload = function (latitude, longitude) {
-  var autoID = geolocationRef.push().key;
-  geolocationRef.child(autoID).set({
-    latitude: latitude,
-    longitude: longitude,
-  });
-};
+// window.onload = function (latitude, longitude) {
+//   var autoID = geolocationRef.push().key;
+//   geolocationRef.child(autoID).set({
+//     latitude: latitude,
+//     longitude: longitude,
+//   });
+// };
 // function saveLocation(longitude, latitude) {
 
 //   return longitude;

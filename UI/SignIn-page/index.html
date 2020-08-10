@@ -25,14 +25,15 @@
             </div>
           
             <form action="" class="signin-form">
-              <input type="text" class="name-input" placeholder="Username" />
-              <input type="password" class="email-input" placeholder="Password" />
+              <input type="text" class="name-input" placeholder="Username or email" id="username"/>
+              <input type="password" class="email-input" placeholder="Password" id="password" />
         
-           <input type="button" value="SIGN IN" />
+           <input type="button" value="SIGN IN" id="sign-in"/>
             </form>
          
         
         </div>
+        
         <div class="login-user">
           <p>Visit website as a <span> <a href="./../landing-page/index.html">user</a> </span> </p>
         </div>
@@ -44,5 +45,14 @@
       
       
     </div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
+    
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+                     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-analytics.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

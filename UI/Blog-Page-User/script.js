@@ -14,6 +14,7 @@ firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
 var subscribersRef = firebase.database().ref("subscribers");
+var blogsRef = firebase.database().ref("blogs");
 
 const form = document.getElementById("form");
 const email = document.getElementById("email");
@@ -91,3 +92,91 @@ form.addEventListener("submit", function (e) {
     document.getElementById("form").reset();
   }
 });
+
+blogsRef.on("value", getData);
+
+var blogsContainer = document.querySelector(".blogs-wrapper");
+function insertNewRecord(avatar, message, date, title) {
+  var blogDiv = document.createElement("div");
+  var blogTitleDiv = document.createElement("div");
+  var blogDetailsDiv = document.createElement("div");
+  var blogDatesDiv = document.createElement("div");
+  var blogCommentsDiv = document.createElement("div");
+  var blogPicDiv = document.createElement("div");
+  var blogTextDiv = document.createElement("div");
+  var blogMoreDiv = document.createElement("div");
+  var blogReadMoreDiv = document.createElement("div");
+  // var blogDotsDiv = document.createElement("div");
+
+  blogDiv.className = "blog";
+  blogTitleDiv.className = "blog-title";
+  blogDetailsDiv.className = "blog-details";
+  blogDatesDiv.className = "dates";
+  blogCommentsDiv.className = "comments";
+  blogPicDiv.className = "blog-pic";
+  blogTextDiv.className = "blog-text";
+  blogMoreDiv.className = "blog-more";
+  blogReadMoreDiv.className = "read-more";
+  // blogDotsDiv.className = "dots-options";
+
+  var t = document.createElement("h1");
+  blogTitleDiv.appendChild(t);
+
+  var date = document.createElement("p");
+  blogDatesDiv.appendChild(date);
+
+  var d = document.createElement("p");
+  blogDetailsDiv.appendChild(d);
+
+  var c = document.createElement("p");
+  blogCommentsDiv.appendChild(c);
+
+  var a = document.createElement("a");
+  blogReadMoreDiv.appendChild(a);
+
+  var image = document.createElement("img");
+  blogPicDiv.appendChild(image);
+
+  var text = document.createElement("p");
+  blogTextDiv.appendChild(text);
+
+  var read = document.createElement("p");
+  a.appendChild(read);
+
+  t.innerHTML = title;
+  blogPicDiv.innerHTML = avatar;
+  text.innerHTML = message;
+
+  blogDiv.appendChild(t);
+  blogDiv.appendChild(blogDatesDiv);
+  blogDiv.appendChild(blogPicDiv);
+  blogDiv.appendChild(blogTextDiv);
+  blogDiv.appendChild(blogMoreDiv);
+
+  // var dots = document.createElement("p");
+  // blogDotsDiv.appendChild(dots);
+  var newBlog = blogDiv;
+  a.href = "blog.html";
+
+  blogsContainer.appendChild(newBlog);
+}
+
+function getData(data) {
+  blogs = data.val();
+  var keys = Object.keys(blogs);
+  // clearBlogs();
+  for (var i = 0; i < keys.length; i++) {
+    var key = keys[i];
+    var avatar = blogs[key].avatar;
+    var date = blogs[key].date;
+    var message = blogs[key].message;
+    var title = blogs[key].title;
+    insertNewRecord(avatar, message, date, title);
+  }
+}
+
+// const clearBlogs = () => {
+//   blogsContainer = document.querySelector(".messages-container");
+//   let oldBody = blogsContainer.querySelector("div");
+//   oldBody.innerHTML = "";
+// };

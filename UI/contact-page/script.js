@@ -59,6 +59,33 @@ function checkEmail(input) {
     showError(input, "Email is not valid");
   }
 }
+// get today's date
+function getTodayDate() {
+  var today = new Date();
+  var months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  var month = today.getMonth() + 1;
+  for (let i = 0; i <= months.length - 1; i++) {
+    if (i + 1 === month) {
+      var monthWord = months[i];
+    }
+  }
+
+  var date = monthWord + " " + today.getDate() + "," + today.getFullYear();
+  return date;
+}
 
 function saveMessages(name, email, message) {
   var newMessageRef = messagesRef.push();
@@ -66,6 +93,7 @@ function saveMessages(name, email, message) {
     name: name,
     email: email,
     message: message,
+    date: getTodayDate(),
   });
 }
 // Elements validity

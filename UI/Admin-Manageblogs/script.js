@@ -94,8 +94,13 @@ function checkLength(input, min, max) {
       `${getFieldName(input)} must be less than ${max} characters`
     );
   } else {
+    removeError(input);
     return true;
   }
+}
+function removeError(input) {
+  const formControl = input.parentElement;
+  formControl.className = "form-control";
 }
 
 // Get fieldname
@@ -107,18 +112,47 @@ function getFieldName(input) {
 function checkEmail(input) {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if (re.test(input.value.trim())) {
+    removeError(input);
     return true;
   } else {
     showError(input, "Email is not valid");
   }
 }
+// get today's date
+function getTodayDate() {
+  var today = new Date();
+  var months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  var month = today.getMonth() + 1;
+  for (let i = 0; i <= months.length - 1; i++) {
+    if (i + 1 === month) {
+      var monthWord = months[i];
+    }
+  }
 
-function saveBlogs(title, message, avatar) {
+  var date = monthWord + " " + today.getDate() + "," + today.getFullYear();
+  return date;
+}
+
+function saveBlogs(title, message, avatar, date) {
   var autoID = blogsRef.push().key;
   blogsRef.child(autoID).set({
     title: title,
     message: message,
     avatar: avatar,
+    date: date,
   });
 }
 // Elements validity
@@ -132,7 +166,7 @@ form.addEventListener("submit", function (e) {
     checkLength(message, 6, 4000)
   ) {
     // save message to database
-    saveBlogs(title.value, message.value, avatar.value);
+    saveBlogs(title.value, message.value, avatar.value, getTodayDate());
 
     //display alert
     document.querySelector(".alert").style.display = "block";
@@ -145,4 +179,17 @@ form.addEventListener("submit", function (e) {
     // Clear form
     document.getElementById("form").reset();
   }
+});
+const auth = firebase.auth();
+const signout = document.getElementById("signout");
+signout.addEventListener("click", () => {
+  auth
+    .signOut()
+    .then(() => {
+      window.location = "./../SignIn-page/index.html";
+      console.log("User signed out successfully !");
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 });

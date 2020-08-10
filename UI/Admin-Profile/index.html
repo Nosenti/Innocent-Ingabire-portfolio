@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="./../img/logo.png" type="image/png" />
+    <script
+      src="https://kit.fontawesome.com/010f6f666a.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <title>Innocent Ingabire</title>
+  </head>
+
+  <body>
+    <div class="body-container">
+      <header class="header">
+        <div class="logo-box">
+          <div class="logo">
+            <img src="./../img/logo.png" alt="logo" />
+          </div>
+        </div>
+        <ul class="navbar">
+          <div class="dropdown-btn">
+            <button class="dropbtn" onclick="myFunction()">
+              <h4>Admin</h4>
+
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content" id="myDropdown">
+              <a href="#">Profile</a>
+              <a href="./../Admin-Manageblogs/index.html">Blog</a>
+              <a href="./../Admin-Inbox/index.html">Inbox</a>
+              <a href="#">Sign out</a>
+            </div>
+          </div>
+          <div class="dropdown-btn">
+            <button class="dropbtn" onclick="myFunction2()">
+              <i class="fas fa-bell"></i>
+              <h4>5</h4>
+            </button>
+            <div class="dropdown-content" id="myDropdown1">
+              <a href="#">You have a new text message</a>
+              <a href="#">2+ people subscribed</a>
+              <a href="#">1 perscon commented on your post</a>
+            </div>
+          </div>
+        </ul>
+      </header>
+
+      <div class="body-content">
+        <div class="top-section">
+          <div class="profile-section">
+            <div class="profile-avatar">
+              <img
+                class="profile-photo"
+                src="./../img/passport-photo.jpg "
+                alt="profile picture "
+              />
+            </div>
+            <div class="profile-name">
+              <h2>Innocent Ingabire</h2>
+            </div>
+            <div class="edit-button">
+              <button>Edit Profile</button>
+            </div>
+          </div>
+        </div>
+        <div class="main-section">
+          <div class="top-cards">
+            <div class="blog-card">
+              <i class="far fa-file card-icon"></i>
+              <h4 class="card-status">...</h4>
+              <h4 class="card-description">My Profile</h4>
+            </div>
+            <div class="blog-card">
+              <i class="far fa-file card-icon"></i>
+              <h4 class="card-status">150</h4>
+              <h4 class="card-description">All posts</h4>
+            </div>
+            <div class="blog-card">
+              <i class="fas fa-user-friends card-icon"></i>
+              <h4 class="card-status">79</h4>
+              <h6 class="card-description">Subscribers</h6>
+            </div>
+            <div class="blog-card">
+              <i class="fas fa-chart-line card-icon"></i>
+              <h4 class="card-status">45</h4>
+              <h6 class="card-description">Page Visitors this month</h6>
+            </div>
+          </div>
+          <div class="content-section">
+            <div class="content-section__btn">
+              <span onclick="loadProfile()">Profile</span>
+              <span onclick="loadSubscribers()">Subscribers</span>
+              <hr id="indicator" />
+            </div>
+            <div class="section-wrapper" id="profile-section">
+              <div class="personal-information">
+                <div class="address"><span>Addess:</span> Kacyiru</div>
+                <div class="email">
+                  <span>Email:</span>
+                  <p>innocentingabire01@gmail.com</p>
+                </div>
+              </div>
+              <div class="blogs">
+                <div class="blog-heading">
+                  <h2>Latest Blogs</h2>
+                </div>
+                <div class="blogs-wrapper">
+                  <div class="blog">
+                    <h1>Hey, this is my first blog</h1>
+                  </div>
+                  <div class="blog">
+                    <h1>Hey, this is my second blog</h1>
+                  </div>
+                  <div class="blog">
+                    <h1>Hey, this is my third blog</h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="section-wrapper" id="subscription-section">
+              <p>I have a thousand subscribers</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <p>Innocent Ingabire &copy; 2020</p>
+      </div>
+    </div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-database.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+                           https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-analytics.js"></script>
+
+    <script src="script.js"></script>
+  </body>
+</html>

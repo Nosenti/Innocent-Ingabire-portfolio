@@ -1,6 +1,7 @@
 const Joi = require("joi");
 const express = require("express");
 const app = express();
+const mongoose = require("mongoose");
 
 app.use(express.json());
 
@@ -10,7 +11,7 @@ const blogs = [
   { id: 3, name: "blog 3" },
 ];
 app.get("/", (req, res) => {
-  res.send("Hello There");
+  res.send("This is the landing page");
 });
 
 app.get("/api/blogs", (req, res) => {

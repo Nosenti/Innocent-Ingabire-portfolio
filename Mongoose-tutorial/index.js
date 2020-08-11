@@ -1,25 +1,26 @@
 const express = require("express");
-const Post = require("./models/Post");
 const mongoose = require("mongoose");
-const router = express.Router();
-const routes = require("./routes");
+
+const bookController = require("./controllers/posts");
 
 mongoose
-  .connect("mongodb://localhost:27017/test", { useNewUrlParser: true })
+  .connect("mongodb://localhost:27017/express-mongoose", {
+    useNewUrlParser: true,
+  })
   .then(() => {
     const app = express();
-    app.use("/api", routes);
-    app.get("/", (req, res) => {
-      res.send("Hello, World");
-    });
+    app.use(express.json());
 
-    app.listen(5000, () => {
-      console.log("Server has started!");
+    app.get("/posts", bookController.findPosts);
+    app.post("/posts", bookController.createPost);
+    app.get("/posts/:id", bookController.findPost);
+    app.patch("/posts/:id", bookController.updatePost);
+    app.delete("/posts/:id", bookController.deletePost);
+
+    app.listen(8000, () => {
+      console.log("Server has started at port 8000");
     });
+  })
+  .catch(() => {
+    console.log("Database connection failed!");
   });
-// Get all posts
-router.get("/posts", async (req, res) => {
-  const posts = await Post.find();
-  res.send(posts);
-});
-module.exports = router;

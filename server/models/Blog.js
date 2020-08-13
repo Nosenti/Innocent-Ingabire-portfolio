@@ -15,4 +15,4 @@ const schema = mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Post", schema);
+module.exports = mongoose.model("Blog", schema);

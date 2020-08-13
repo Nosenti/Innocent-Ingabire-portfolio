@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const postController = require("./../controllers/posts");
+const blogController = require("../controllers/blogs");
 const queryController = require("./../controllers/queries");
 const validator = require("./../validation/validate");
 
@@ -12,8 +12,8 @@ router.post(
 );
 router.get("/api/queries/:id", queryController.findQuery);
 
-router.get("/api/posts", postController.findPosts);
-router.post("/api/posts", validator.postValidator, postController.createPost);
-router.get("/api/posts/:id", postController.findPost);
+router.get("/api/blogs", blogController.findBlogs);
+router.post("/api/blogs", validator.blogValidator, blogController.createBlog);
+router.get("/api/blogs/:id", blogController.findBlog);
 
 module.exports = router;

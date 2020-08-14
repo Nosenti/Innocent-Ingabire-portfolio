@@ -33,7 +33,7 @@ router.post("/api/user/login", passport.authenticate("local"), (req, res) => {
     res.send("logged out successfully");
   });
 router.get(
-  "/api/user/dashboard",
+  "/api/user/blogs",
   (req, res, next) => {
     if (req.isAuthenticated()) {
       console.log("Authenticated");
@@ -42,9 +42,18 @@ router.get(
       res.send("Unauthorized access.");
     }
   },
-  (req, res) => {
-    res.send("Inside dashboard");
-  }
+  blogController.findBlogs
 );
-
+router.post(
+  "/api/user/blogs",
+  (req, res, next) => {
+    if (req.isAuthenticated()) {
+      console.log("Authenticated");
+      return next();
+    } else {
+      res.send("Unauthorized access.");
+    }
+  },
+  blogController.createBlog
+);
 module.exports = router;

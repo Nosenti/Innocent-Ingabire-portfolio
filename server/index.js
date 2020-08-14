@@ -1,10 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const session = require("express-session");
+const app = express();
+const passport = require("./config/passport");
 
 const router = require("./routes/routes");
-const app = express();
+
 app.use(express.json());
-app.use("/", router);
+
 const PORT = process.env.PORT || 5000;
 
 mongoose
@@ -12,6 +15,13 @@ mongoose
     useNewUrlParser: true,
   })
   .then(() => {
+    require("./seeds/admin");
+    app.use(session({ secret: "secret" }));
+    app.use(passport.initialize());
+
+    app.use(passport.session());
+    app.use("/", router);
+
     console.log("Dababase connected successfully");
   })
   .catch((error) => {

@@ -11,11 +11,14 @@ router.post(
   validator.queryValidator,
   queryController.createQuery
 );
+
 router.get("/api/queries/:id", queryController.findQuery);
 
 router.get("/api/blogs", blogController.findBlogs);
 router.post("/api/blogs", validator.blogValidator, blogController.createBlog);
 router.get("/api/blogs/:id", blogController.findBlog);
+router.patch("/api/blogs/:id", blogController.updateBlog);
+router.delete("/api/blogs/:id", blogController.deleteBlog);
 
 router.post("/api/user/login", passport.authenticate("local"), (req, res) => {
   req.login(req.body, (error) => {
@@ -30,16 +33,38 @@ router.post("/api/user/login", passport.authenticate("local"), (req, res) => {
 }),
   router.post("/api/user/logout", (req, res) => {
     req.logout();
-    res.send("logged out successfully");
+    res.send({ message: "logged out successfully" });
   });
+
+router.patch(
+  "/api/user/blogs/:id",
+  (req, res, next) => {
+    if (req.isAuthenticated()) {
+      return next();
+    } else {
+      res.send({ message: "Unauthorized access." });
+    }
+  },
+  blogController.updateBlog
+);
+router.delete(
+  "/api/user/blogs/:id",
+  (req, res, next) => {
+    if (req.isAuthenticated()) {
+      return next();
+    } else {
+      res.send({ message: "Unauthorized access." });
+    }
+  },
+  blogController.deleteBlog
+);
 router.get(
   "/api/user/blogs",
   (req, res, next) => {
     if (req.isAuthenticated()) {
-      console.log("Authenticated");
       return next();
     } else {
-      res.send("Unauthorized access.");
+      res.send({ message: "Unauthorized access." });
     }
   },
   blogController.findBlogs
@@ -48,10 +73,9 @@ router.post(
   "/api/user/blogs",
   (req, res, next) => {
     if (req.isAuthenticated()) {
-      console.log("Authenticated");
       return next();
     } else {
-      res.send("Unauthorized access.");
+      res.send({ message: "Unauthorized access." });
     }
   },
   blogController.createBlog

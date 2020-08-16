@@ -19,7 +19,7 @@ passport.use(
           }
         }
       })
-      .catch((error) => done(error));
+      .catch((error) => done({ error: "Unauthorized Access" }));
   })
 );
 

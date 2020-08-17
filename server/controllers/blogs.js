@@ -1,5 +1,6 @@
 const Blog = require("../models/Blog");
 const { post } = require("../routes/routes");
+const User = require("../models/User");
 
 exports.findBlogs = async (req, res) => {
   const blogs = await Blog.find();
@@ -58,3 +59,40 @@ exports.updateLikes = async (req, res) => {
     res.status(500).send({ error: "Server Error" });
   }
 };
+
+// add comments
+exports.createComment = async (req, res) => {
+  try {
+    // const user = await User.findById(req.user.id).select("-password");
+    const blog = await Blog.findById(req.params.id);
+    const newComment = {
+      text: req.body.text,
+      name: req.body.name,
+      // avatar: user.avatar,
+      // user: req.user.id,
+    };
+    blog.comments.unshift(newComment);
+    await blog.save();
+    res.send({ status: "Comment added" });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send({ error: "Server Error" });
+  }
+};
+// exports.deleteComment = async (req, res) => {
+//   try {
+//     // const user = await User.findById(req.user.id).select("-password");
+//     const blog = await Blog.findById(req.params.id);
+//     const comment = blog.comments.find(
+//       (comment) => comment.id === req.params.comment_id
+//     );
+
+//     // Make sure the comment exists
+//     if (!comment) {
+//       res.status(404).send({ status: "Comment not found" });
+//     }
+//   } catch (error) {
+//     console.error(error.message);
+//     res.status(500).send({ error: "Server Error" });
+//   }
+// };

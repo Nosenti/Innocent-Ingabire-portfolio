@@ -64,6 +64,18 @@ router.put(
   blogController.updateLikes
 );
 
+// comments endpoints
+router.post(
+  "/api/user/blogs/comment/:id",
+  routeProtector.protectRoute,
+  blogController.createComment
+);
+// router.delete(
+//   "/api/user/blogs/comment/:id/:comment_id",
+//   routeProtector.protectRoute,
+//   blogController.deleteComment
+// );
+
 // profile endpoint
 router.post(
   "/api/user/profile",

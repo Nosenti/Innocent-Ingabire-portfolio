@@ -26,7 +26,7 @@ exports.createProject = async (req, res) => {
     const profile = await Profile.findOne({ user: req.user.id });
     profile.projects.unshift(newProject);
     await profile.save();
-    res.send(profile);
+    res.send({ message: "Added a project" });
   } catch (error) {
     console.error(error.message);
     res.status(500).send("server Error");
@@ -43,7 +43,7 @@ exports.deleteProject = async (req, res) => {
       .indexOf(req.params.pro_id);
     profile.projects.splice(removeIndex, 1);
     await profile.save();
-    res.send(profile);
+    res.send({ status: "Deleted a project" });
   } catch (error) {
     console.error(error.message);
     res.status(500).send("server Error");

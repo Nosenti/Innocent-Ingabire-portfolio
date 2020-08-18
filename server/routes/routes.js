@@ -2,27 +2,22 @@ const express = require("express");
 const router = express.Router();
 const blogController = require("../controllers/blogs");
 const queryController = require("./../controllers/queries");
+const loginController = require("./../controllers/user");
 const profileController = require("./../controllers/profile");
 const validator = require("./../validation/validate");
-const passport = require("passport");
 
 const User = require("./../models/User");
 const routeProtector = require("./../validation/routesProtector");
 
-// login and logout enpoint
-router.post(
-  "/api/user/login",
-  passport.authenticate("local"),
-  routeProtector.login
-),
-  router.post("/api/user/logout", routeProtector.logout);
-
-// Queries endpoints
-router.get(
-  "/api/user/queries",
-  routeProtector.protectRoute,
-  queryController.findQueries
-);
+// login enpoint
+router.post("/api/user/login", loginController.login),
+  // Queries endpoints
+  router.get(
+    "/api/user/queries",
+    // routeProtector.protectRoute,
+    routeProtector.authenticateToken,
+    queryController.findQueries
+  );
 router.post(
   "/api/queries",
   validator.queryValidator,
@@ -30,7 +25,7 @@ router.post(
 );
 router.get(
   "/api/queries/:id",
-  routeProtector.protectRoute,
+  routeProtector.authenticateToken,
   queryController.findQuery
 );
 
@@ -41,33 +36,33 @@ router.get("/api/user/blogs", blogController.findBlogs);
 router.get("/api/blogs/:id", blogController.findBlog);
 router.post(
   "/api/user/blogs",
-  routeProtector.protectRoute,
+  routeProtector.authenticateToken,
   validator.blogValidator,
   blogController.createBlog
 );
 router.patch(
   "/api/user/blogs/:id",
-  routeProtector.protectRoute,
+  routeProtector.authenticateToken,
   validator.blogValidator,
   blogController.updateBlog
 );
 router.delete(
   "/api/user/blogs/:id",
-  routeProtector.protectRoute,
+  routeProtector.authenticateToken,
   blogController.deleteBlog
 );
 
 // update likes
 router.put(
   "/api/user/blogs/like/:id",
-  routeProtector.protectRoute,
+  routeProtector.authenticateToken,
   blogController.updateLikes
 );
 
 // comments endpoints
 router.post(
   "/api/user/blogs/comment/:id",
-  routeProtector.protectRoute,
+  validator.commentValidator,
   blogController.createComment
 );
 // router.delete(
@@ -79,17 +74,17 @@ router.post(
 // profile endpoint
 router.post(
   "/api/user/profile",
-  routeProtector.protectRoute,
+  routeProtector.authenticateToken,
   profileController.createProfile
 );
 router.patch(
   "/api/user/profile/:id",
-  routeProtector.protectRoute,
+  routeProtector.authenticateToken,
   profileController.updateProfile
 );
 router.get(
   "/api/user/profile",
-  routeProtector.protectRoute,
+  routeProtector.authenticateToken,
   profileController.readProfile
 );
 module.exports = router;
@@ -97,11 +92,11 @@ module.exports = router;
 //projects endpoint
 router.put(
   "/api/user/profile/projects",
-  routeProtector.protectRoute,
+  routeProtector.authenticateToken,
   profileController.createProject
 );
 router.delete(
   "/api/user/profile/projects/:pro_id",
-  routeProtector.protectRoute,
+  routeProtector.authenticateToken,
   profileController.deleteProject
 );

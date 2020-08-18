@@ -1,34 +1,18 @@
 const Blog = require("./../models/Blog");
 const blogController = require("../controllers/blogs");
 const queryController = require("./../controllers/queries");
+const loginController = require("./../controllers/user");
 const validator = require("./../validation/validate");
-const passport = require("passport");
 const User = require("./../models/User");
 const jwt = require("jsonwebtoken");
 
-exports.protectRoute = async (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return next();
-  } else {
-    res.send({ message: "Unauthorized access." });
-  }
-  next();
-};
-
-exports.login = async (req, res) => {
-  req.login(req.body, (error) => {
-    const admin = User.findOne({
-      email: req.body.email,
-    });
-    const token = jwt.sign({ admin: User }, "nosenti");
-
-    if (error) res.send(error);
-    else {
-      res.status(200).send({
-        status: 200,
-        token: token,
-      });
-    }
+exports.authenticateToken = async (req, res, next) => {
+  const token = req.headers.authorization.split(" ")[1];
+  if (token === null) return res.status(401);
+  jwt.verify(token, "nosenti", (err, user) => {
+    if (err) return res.status(403);
+    req.user = user;
+    next();
   });
 };
 

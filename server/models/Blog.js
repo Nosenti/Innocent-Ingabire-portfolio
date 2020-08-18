@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+require("mongoose-type-url");
 
 const schema = mongoose.Schema({
   title: {
@@ -9,6 +10,7 @@ const schema = mongoose.Schema({
     type: String,
     minlength: 3,
   },
+  image: mongoose.SchemaTypes.Url,
   likes: [
     {
       user: {

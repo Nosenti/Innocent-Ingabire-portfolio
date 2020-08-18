@@ -2,7 +2,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const app = express();
-const passport = require("./config/passport");
 
 const router = require("./routes/routes");
 
@@ -17,9 +16,9 @@ mongoose
   .then(() => {
     require("./seeds/admin");
     app.use(session({ secret: "secret" }));
-    app.use(passport.initialize());
+    // app.use(passport.initialize());
 
-    app.use(passport.session());
+    // app.use(passport.session());
     app.use("/", router);
 
     console.log("Dababase connected successfully");

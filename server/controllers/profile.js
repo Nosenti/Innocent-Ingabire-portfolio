@@ -43,9 +43,15 @@ exports.deleteProject = async (req, res) => {
       .indexOf(req.params.pro_id);
     profile.projects.splice(removeIndex, 1);
     await profile.save();
-    res.send({ status: "Deleted a project" });
+    res.status(200).send({
+      status: 200,
+      message: "Deleted a project",
+    });
   } catch (error) {
     console.error(error.message);
-    res.status(500).send("server Error");
+    res.status(500).send({
+      status: 500,
+      message: "server Error",
+    });
   }
 };

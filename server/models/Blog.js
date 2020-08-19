@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+require("mongoose-type-url");
 
 const schema = mongoose.Schema({
   title: {
@@ -9,6 +10,33 @@ const schema = mongoose.Schema({
     type: String,
     minlength: 3,
   },
+  image: mongoose.SchemaTypes.Url,
+  likes: [
+    {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "users",
+      },
+    },
+  ],
+  comments: [
+    {
+      user: {},
+      text: {
+        type: String,
+      },
+      name: {
+        type: String,
+      },
+      avatar: {
+        type: String,
+      },
+      date: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now,

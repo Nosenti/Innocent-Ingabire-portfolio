@@ -28,7 +28,10 @@ exports.login = async (req, res) => {
     };
     jwt.sign(payload, "nosenti", (err, token) => {
       if (err) throw err;
-      res.send({ token: token });
+      res.status(200).send({
+        status: "success",
+        token: token,
+      });
     });
 
     if (admin == null)

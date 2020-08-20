@@ -4,7 +4,7 @@
   "description": "",
   "main": "server/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha ./server/tests/*.test.js",
     "start": "nodemon server/index.js"
   },
   "keywords": [],
@@ -12,6 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-flash": "0.0.2",
@@ -19,6 +21,7 @@
     "joi": "^17.2.0",
     "joigoose": "^8.0.0",
     "jsonwebtoken": "^8.5.1",
+    "mocha": "^8.1.1",
     "mongoose": "^5.9.28",
     "mongoose-type-url": "^2.0.0",
     "passport": "^0.4.1",

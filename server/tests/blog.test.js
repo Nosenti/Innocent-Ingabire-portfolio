@@ -1,44 +1,45 @@
-const chai = require("chai");
-const chaiHttp = require("chai-http");
-const app = require("./../index");
-const { deleteOne } = require("../models/Blog");
+import chai from "chai";
+import chaiHttp from "chai-http";
+import app from "./../index";
 
 chai.use(chaiHttp);
 const expect = chai.expect;
+let blogId;
+
+let token;
+describe("Testing login", () => {
+  it("should return 200", (done) => {
+    chai
+      .request(app)
+      .post("/api/user/login")
+      .send({
+        email: "nosenti@gmail.com",
+        password: "nosenti",
+      })
+      .end((error, response) => {
+        expect(error).to.be.null;
+        expect(response).to.have.status(200);
+        token = response.body.token;
+        done();
+      });
+  });
+});
 
 describe("Testing Get blog posts", () => {
-  it("should return 200", (done) => {
+  // it("should return 200", (done) => {
+  //   chai
+  //     .request(app)
+  //     .get("/api/user/blogs")
+  //     .end((error, response) => {
+  //       expect(error).to.be.null;
+  //       expect(response).to.have.status(200);
+  //       done();
+  //     });
+  // });
+  it("should update and return 200", (done) => {
     chai
       .request(app)
-      .get("/api/user/blogs")
-      .end((error, response) => {
-        expect(error).to.be.null;
-        expect(response).to.have.status(200);
-        done();
-      });
-  });
-});
-
-// Getting one blog post
-describe("Testing Get one blog post", () => {
-  it("should return 200", (done) => {
-    chai
-      .request(app)
-      .get("/api/blogs/5f3cab08d9e9730c64b84c0b")
-      .end((error, response) => {
-        expect(error).to.be.null;
-        expect(response).to.have.status(200);
-        done();
-      });
-  });
-});
-
-// Updating a blog post
-describe("Testing updating a blog post", () => {
-  it("should return 200", (done) => {
-    chai
-      .request(app)
-      .patch("/api/user/blogs/:id")
+      .patch(`/api/user/blogs/${blogId}`)
       .send({
         title: "This is the title of the blog",
         image: "image url",
@@ -50,23 +51,64 @@ describe("Testing updating a blog post", () => {
         done();
       });
   });
-});
-
-describe("Testing Post blog posts", () => {
-  it("should return 200", (done) => {
-    chai
-      .request(app)
-      .post("/api/user/blogs")
-      .end((error, response) => {
-        expect(error).to.be.null;
-        expect(response).to.have.status(200);
-        done();
-      });
-  });
-});
-
-// deleting a blog post
-describe("Testing delete a blog post", () => {
+  // it("should not update the blog", (done) => {
+  //   chai
+  //     .request(app)
+  //     .patch("/api/user/blogs/hehehe")
+  //     // .set("token", token)
+  //     .end((error, response) => {
+  //       expect(response).to.have.status(404);
+  //       done();
+  //     });
+  // });
+  // it("should return 200", (done) => {
+  //   chai
+  //     .request(app)
+  //     .post("/api/user/blogs")
+  //     // .set("token", token)
+  //     .send({
+  //       title: "My blog post",
+  //       content: "I had been here before",
+  //       image: "https://picsum.photos/600/300",
+  //     })
+  //     .end((error, response) => {
+  //       expect(error).to.be.null;
+  //       expect(response).to.have.status(200);
+  //       blogId = response.body.data._id;
+  //       console.log(blogId);
+  //       done();
+  //     });
+  // });
+  // it("should not create a blog post", (done) => {
+  //   chai
+  //     .request(app)
+  //     .post("/api/user/blogs")
+  //     .set("token", "anyonymours")
+  //     .send({
+  //       title: "My blog post",
+  //       content: "I had been here before",
+  //       image: "https://picsum.photos/600/300",
+  //     })
+  //     .end((err, response) => {
+  //       expect(response).to.have.status(401);
+  //       done();
+  //     });
+  // });
+  // it("It should not create a blog", (done) => {
+  //   chai
+  //     .request(app)
+  //     .post("/api/user/blogs")
+  //     .set("token", "ertohaogphhhhhhhhhhhh35")
+  //     .send({
+  //       title: "",
+  //       content: "",
+  //       image: "",
+  //     })
+  //     .end((err, response) => {
+  //       expect(response).to.have.status(400);
+  //       done();
+  //     });
+  // });
   it("should return 200", (done) => {
     chai
       .request(app)
@@ -77,35 +119,61 @@ describe("Testing delete a blog post", () => {
         done();
       });
   });
-});
+  // it("should return 200", (done) => {
+  //   chai
+  //     .request(app)
+  //     .post(`/api/user/blogs/comment/${blogId}`)
+  //     .send({
+  //       name: "Nosenti",
+  //       text: "It is Innocent",
+  //     })
+  //     .end((error, response) => {
+  //       expect(error).to.be.null;
+  //       expect(response).to.have.status(200);
 
-// comment on a post
-describe("Testing posting a comment on blog posts", () => {
+  //       done();
+  //     });
+  // });
   it("should return 200", (done) => {
     chai
       .request(app)
-      .post("/api/user/blogs/comment/5f3cab08d9e9730c64b84c0b")
-      .send({
-        name: "Nosenti",
-        text: "It is Innocent",
-      })
+      .put(`/api/user/blogs/like/${blogId}`)
       .end((error, response) => {
         expect(error).to.be.null;
         expect(response).to.have.status(200);
-
         done();
       });
   });
 });
 
-describe("Testing Liking a blog post", () => {
+describe("Testing for user/ Blog", () => {
   it("should return 200", (done) => {
     chai
       .request(app)
-      .put("/api/user/blogs/like/:id")
+      .get("/api/blogs")
       .end((error, response) => {
         expect(error).to.be.null;
         expect(response).to.have.status(200);
+        done();
+      });
+  });
+  // it("should return 200 on getting one blog", (done) => {
+  //   chai
+  //     .request(app)
+  //     .get("/api/blogs/:id")
+  //     .end((error, response) => {
+  //       expect(error).to.be.null;
+  //       expect(response).to.have.status(200);
+  //       done();
+  //     });
+  // });
+  it("should not get a blog", (done) => {
+    chai
+      .request(app)
+      .get("/api/blogs/hey there")
+      .end((error, response) => {
+        expect(error).to.be.null;
+        expect(response).to.have.status(404);
         done();
       });
   });

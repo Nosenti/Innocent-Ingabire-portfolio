@@ -1,11 +1,10 @@
-const chai = require("chai");
-const chaiHttp = require("chai-http");
-const app = require("./../index");
-const { deleteOne } = require("../models/Blog");
+import chai from "chai";
+import chaiHttp from "chai-http";
+import app from "./../index";
 
 chai.use(chaiHttp);
 const expect = chai.expect;
-
+let token;
 describe("Testing login", () => {
   it("should return 200", (done) => {
     chai
@@ -18,6 +17,7 @@ describe("Testing login", () => {
       .end((error, response) => {
         expect(error).to.be.null;
         expect(response).to.have.status(200);
+        token = response.body.token;
         done();
       });
   });
@@ -51,3 +51,5 @@ describe("Testing login", () => {
       });
   });
 });
+
+export default token;

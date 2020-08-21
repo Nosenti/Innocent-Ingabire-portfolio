@@ -1,6 +1,6 @@
-const Blog = require("../models/Blog");
-const { post } = require("../routes/routes");
-const User = require("../models/User");
+import Blog from "../models/Blog";
+import User from "../models/User";
+require("regenerator-runtime/runtime");
 
 exports.findBlogs = async (req, res) => {
   const blogs = await Blog.find();
@@ -19,7 +19,7 @@ exports.findBlog = async (req, res) => {
   try {
     const blog = await Blog.findById(req.params.id);
     res.status(200).send({ data: blog });
-  } catch {
+  } catch (error) {
     res.status(404).send({ error: "Blog post is not found!" });
   }
 };
@@ -30,7 +30,7 @@ exports.updateBlog = async (req, res) => {
     Object.assign(blog, req.body);
     blog.save();
     res.send({ data: blog });
-  } catch {
+  } catch (error) {
     res.status(404).send({ error: "Blog is not found!" });
   }
 };
@@ -40,7 +40,7 @@ exports.deleteBlog = async (req, res) => {
     const blog = await Blog.findById(req.params.id);
     await blog.remove();
     res.status(200).send({ status: "Blog is deleted" });
-  } catch {
+  } catch (error) {
     res.status(404).send({ error: "Blog is not found!" });
   }
 };

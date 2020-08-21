@@ -1,4 +1,4 @@
-const Profile = require("./../models/Profile");
+import Profile from "./../models/Profile";
 
 exports.updateProfile = async (req, res) => {
   try {
@@ -10,7 +10,6 @@ exports.updateProfile = async (req, res) => {
     res.status(404).send(console.error(error));
   }
 };
-exports.readProfile = async (req, res) => {};
 exports.createProfile = async (req, res) => {
   const profile = new Profile(req.body);
   await profile.save();

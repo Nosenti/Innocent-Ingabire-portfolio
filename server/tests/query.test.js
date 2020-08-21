@@ -1,16 +1,30 @@
-const chai = require("chai");
-const chaiHttp = require("chai-http");
-const app = require("./../index");
-// const { deleteOne } = require("../models/Query");
+import chai from "chai";
+import chaiHttp from "chai-http";
+import app from "./../index";
+require("regenerator-runtime/runtime");
 
 chai.use(chaiHttp);
 const expect = chai.expect;
 
-describe("Testing Get Queries posts", () => {
+describe("Testing Get Queries ", () => {
   it("should return 200", (done) => {
     chai
       .request(app)
       .get("/api/user/queries")
+
+      .end((error, response) => {
+        expect(error).to.be.null;
+        expect(response).to.have.status(200);
+        done();
+      });
+  });
+});
+
+describe("Testing Get one query ", () => {
+  it("should return 200", (done) => {
+    chai
+      .request(app)
+      .get("/api/user/queries/:id")
 
       .end((error, response) => {
         expect(error).to.be.null;

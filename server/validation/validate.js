@@ -18,8 +18,8 @@ exports.queryValidator = (req, res, next) => {
 };
 exports.blogValidator = (req, res, next) => {
   const schema = Joi.object({
-    title: Joi.string().min(3).required(),
-    content: Joi.string().min(3).required(),
+    title: Joi.string().min(3).required().trim(),
+    content: Joi.string().min(3).required().trim(),
   });
 
   const result = schema.validate(req.body);

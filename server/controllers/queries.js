@@ -1,4 +1,4 @@
-const Query = require("../models/Query");
+import Query from "../models/Query";
 
 exports.findQueries = async (req, res) => {
   const queries = await Query.find();
@@ -15,7 +15,7 @@ exports.findQuery = async (req, res) => {
   try {
     const query = await Query.findById(req.params.id);
     res.send({ data: query });
-  } catch {
+  } catch (error) {
     res.status(404).send({ error: "Query is not found!" });
   }
 };

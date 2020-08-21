@@ -1,0 +1,65 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is the document for The documentation of My portfolio API",
+    "version": "1.0.0",
+    "title": "Portfolio API",
+    "contact": {
+      "email": "inno100os@gmail.com"
+    }
+  },
+  "tags": [
+    {
+      "name": "blog",
+      "description": "Everything about my blog"
+    },
+    {
+      "name": "queries",
+      "description": "Getting queries as Admin"
+    }
+  ],
+  "schemes": ["http"],
+  "paths": {
+    "/api/user/blogs": {
+      "post": {
+        "tags": ["blog"],
+        "summary": "Add a new blog post",
+        "description": "",
+        "operationId": "addBlog",
+
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "title": "body",
+            "content": "Pet object that needs to be added to the store",
+            "required": true,
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/api/user/queries": {
+      "get": {
+        "tags": ["queries"],
+        "summary": " Get all the queries",
+        "description": "Get all the queries",
+        "operationId": "findQueries",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    }
+  }
+}

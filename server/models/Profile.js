@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-const { array } = require("joi");
+import mongoose from "mongoose";
 
 const ProfileSchema = new mongoose.Schema({
   projects: [
@@ -16,35 +15,5 @@ const ProfileSchema = new mongoose.Schema({
     },
   ],
 });
-
-// experience:[
-//   {
-//     title:{
-//       type:String,
-//       required:true
-//     },
-//     company:{
-//       type:String,
-//       required:true
-//     },
-//     location:{
-//       type:String
-//     },
-//     from:{
-//       type:Date,
-//       required:true
-//     },
-//     to:{
-//       type:Date
-//     },
-//     current:{
-//       type:Boolean,
-//       default:false
-//     },
-//     description:{
-//       type:String
-//     }
-//   }
-// ],
 
 module.exports = mongoose.model("Profile", ProfileSchema);

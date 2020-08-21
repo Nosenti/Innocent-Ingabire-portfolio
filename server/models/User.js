@@ -1,11 +1,11 @@
 //schema
 //create a model
-const mongoose = require("mongoose");
-const Schema = require("mongoose").Schema;
-const ObjectId = Schema.ObjectId;
+import mongoose from "mongoose";
+// import Schema  from "mongoose".Schema;
+// import ObjectId from Schema.ObjectId;
 
-const UserSchema = new Schema({
-  id: ObjectId,
+const UserSchema = mongoose.Schema({
+  // id: ObjectId,
   fullName: String,
   email: String,
   password: String,

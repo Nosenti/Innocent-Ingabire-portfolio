@@ -1,5 +1,5 @@
-const User = require("../models/User");
-const jwt = require("jsonwebtoken");
+import User from "../models/User";
+import jwt from "jsonwebtoken";
 
 exports.login = async (req, res) => {
   try {

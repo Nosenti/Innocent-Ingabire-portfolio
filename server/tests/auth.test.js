@@ -15,7 +15,6 @@ describe("Testing login", () => {
         password: "nosenti",
       })
       .end((error, response) => {
-        expect(error).to.be.null;
         expect(response).to.have.status(200);
         token = response.body.token;
         done();
@@ -30,7 +29,6 @@ describe("Testing login", () => {
         password: "nosenti",
       })
       .end((error, response) => {
-        expect(error).to.be.null;
         expect(response.body.status).to.deep.equal("success");
         done();
       });
@@ -44,7 +42,6 @@ describe("Testing login", () => {
         password: "nosenti",
       })
       .end((error, response) => {
-        expect(error).to.be.null;
         expect(response).to.be.an("object");
 
         done();

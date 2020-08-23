@@ -13,7 +13,6 @@ describe("Testing Get Queries ", () => {
       .get("/api/user/queries")
 
       .end((error, response) => {
-        expect(error).to.be.null;
         expect(response).to.have.status(200);
         done();
       });
@@ -27,7 +26,6 @@ describe("Testing Get one query ", () => {
       .get("/api/user/queries/:id")
 
       .end((error, response) => {
-        expect(error).to.be.null;
         expect(response).to.have.status(200);
         done();
       });
@@ -45,7 +43,6 @@ describe("Testing Post queries", () => {
         message: "This is the message",
       })
       .end((error, response) => {
-        expect(error).to.be.null;
         expect(response).to.have.status(200);
         done();
       });

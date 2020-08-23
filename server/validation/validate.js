@@ -9,7 +9,7 @@ exports.queryValidator = (req, res, next) => {
 
   const result = schema.validate(req.body);
   if (result.error) {
-    res.status(400).json({
+    return res.status(400).json({
       status: 400,
       error: `${result.error.details[0].message}`,
     });
@@ -24,7 +24,7 @@ exports.blogValidator = (req, res, next) => {
 
   const result = schema.validate(req.body);
   if (result.error) {
-    res.status(400).json({
+    return res.status(400).json({
       status: 400,
       error: `${result.error.details[0].message}`,
     });
@@ -39,7 +39,7 @@ exports.commentValidator = (req, res, next) => {
 
   const result = schema.validate(req.body);
   if (result.error) {
-    res.status(400).json({
+    return res.status(400).json({
       status: 400,
       error: `${result.error.details[0].message}`,
     });

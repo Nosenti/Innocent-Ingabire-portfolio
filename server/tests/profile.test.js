@@ -12,7 +12,6 @@ describe("Testing Update profile/ creating a project", () => {
       .request(app)
       .put("/api/user/profile/projects")
       .end((error, response) => {
-        expect(error).to.be.null;
         expect(response).to.have.status(200);
         done();
       });
@@ -25,7 +24,6 @@ describe("Testing Delete a project", () => {
       .request(app)
       .delete("/api/user/profile/projects/:pro_id")
       .end((error, response) => {
-        expect(error).to.be.null;
         expect(response).to.have.status(200);
         done();
       });

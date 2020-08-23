@@ -11,35 +11,311 @@
   "tags": [
     {
       "name": "blog",
-      "description": "Everything about my blog"
+      "description": "Everything I write"
     },
     {
       "name": "queries",
-      "description": "Getting queries as Admin"
+      "description": "Where people send their queries"
+    },
+    {
+      "name": "profile",
+      "description": "Profile of the blog owner"
+    },
+    {
+      "name": "user",
+      "description": "Allow Admin to login"
     }
   ],
-  "schemes": ["http"],
+  "schemes": ["https", "http"],
   "paths": {
+    "/api/blogs": {
+      "get": {
+        "tags": ["blog"],
+        "summary": "Get all blog posts",
+        "description": "",
+        "operationId": "getBlogs",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+
+        "responses": {
+          "200": {
+            "description": "request was successful"
+          }
+        }
+      }
+    },
+    "/api/blogs/{blogId}": {
+      "get": {
+        "tags": ["blog"],
+        "summary": "Get one blog post",
+        "description": "",
+        "operationId": "getOnePet",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "blogId",
+            "description": "Getting one blog post",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success"
+          }
+        }
+      }
+    },
     "/api/user/blogs": {
       "post": {
         "tags": ["blog"],
-        "summary": "Add a new blog post",
+        "summary": "Create a blog post",
         "description": "",
-        "operationId": "addBlog",
+        "operationId": "postBlog",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Creating a blog",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Blog"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Blog added successfully"
+          },
+          "401": {
+            "description": "Admin token is required"
+          },
+          "403": {
+            "description": "Invalid token"
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/api/user/blogs/{blogId}": {
+      "patch": {
+        "tags": ["blog"],
+        "summary": "Update an existing blog",
+        "description": "",
+        "operationId": "updateBlog",
+        "consumes": ["application/json"],
+        "produces": ["application/xml"],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token"
+          },
+          {
+            "in": "path",
+            "name": "blogId",
 
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Edit a blog post",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Blog"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pet not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["blog"],
+        "summary": "Delete an existing blog",
+        "description": "",
+        "operationId": "deleteBlog",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token"
+          },
+          {
+            "in": "path",
+            "name": "blogId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pet not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/api/blogs/comment/{blogId}": {
+      "post": {
+        "tags": ["blog"],
+        "summary": "Add a comment to an existing blog",
+        "description": "",
+        "operationId": "createComment",
+        "consumes": ["application/json"],
+        "produces": ["application/xml"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "blogId",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Adding a comment to a blog post",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Comment"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Blog not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/api/blogs/like/{blogId}": {
+      "put": {
+        "tags": ["blog"],
+        "summary": "Like a blog",
+        "description": "",
+        "operationId": "likeBlog",
+        "consumes": ["application/json"],
+        "produces": ["application/xml"],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token"
+          },
+          {
+            "in": "path",
+            "name": "blogId",
+            "description": "Liking a blog post",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Blog  not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/api/queries": {
+      "post": {
+        "tags": ["queries"],
+        "summary": "Send a query",
+        "description": "",
+        "operationId": "postQueries",
+        "consumes": ["application/json"],
+        "produces": ["application/xml"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Posting a query",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Query"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query sent"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Blog  not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/api/user/login": {
+      "post": {
+        "tags": ["user"],
+        "summary": "login as admin",
+        "description": "",
+        "operationId": "loginAdmin",
         "produces": ["application/json"],
         "parameters": [
           {
             "in": "body",
-            "title": "body",
-            "content": "Pet object that needs to be added to the store",
+            "name": "body",
+            "description": "Admin object that needed to login into his account",
             "required": true,
-            "schema": {}
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
           }
         ],
         "responses": {
-          "405": {
-            "description": "Invalid input"
+          "200": {
+            "description": "Logged in Successfully"
           }
         }
       }
@@ -47,17 +323,234 @@
     "/api/user/queries": {
       "get": {
         "tags": ["queries"],
-        "summary": " Get all the queries",
-        "description": "Get all the queries",
-        "operationId": "findQueries",
+        "summary": "View all queries",
+        "description": "",
+        "operationId": "getQueries",
+        "consumes": ["application/json"],
+        "produces": ["application/xml"],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Blog  not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/api/user/queries/{queryId}": {
+      "get": {
+        "tags": ["queries"],
+        "summary": "View one query by Id",
+        "description": "",
+        "operationId": "getOneQuery",
+        "consumes": ["application/json"],
+        "produces": ["application/xml"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "queryId"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Blog  not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/api/user/profile": {
+      "get": {
+        "tags": ["profile"],
+        "summary": "Get profile information",
+        "description": "view profile info",
+        "operationId": "viewProfile",
         "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token"
+          }
+        ],
         "responses": {
           "200": {
             "description": "successful operation"
           },
           "400": {
-            "description": "Invalid status value"
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Section not found"
           }
+        }
+      }
+    },
+    "/api/user/profile/projects": {
+      "put": {
+        "tags": ["profile"],
+        "summary": "Add a project",
+        "description": "Add or edit a project",
+        "operationId": "editProject",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Add or edit a project",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pet not found"
+          }
+        }
+      }
+    },
+    "/api/user/profile/projects/{projectId}": {
+      "delete": {
+        "tags": ["profile"],
+        "summary": "Find pet by ID",
+        "description": "Delete a particular project",
+        "operationId": "deleteProject",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token"
+          },
+          {
+            "in": "path",
+            "name": "projectId",
+            "description": "Delete a specified project",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pet not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Blog": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        }
+      }
+    },
+    "Comment": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        }
+      }
+    },
+    "Query": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "Profile": {
+      "type": "object",
+      "properties": {
+        "projects": {
+          "type": "string"
+        }
+      }
+    },
+    "Project": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
         }
       }
     }

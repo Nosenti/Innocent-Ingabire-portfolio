@@ -78,6 +78,21 @@ describe("BLOG", () => {
             done();
           });
       });
+      it("should not create a blog", (done) => {
+        chai
+          .request(app)
+          .post("/api/user/blogs")
+          .set("authorization", `Bearer ${token}`)
+          .send({
+            title: "",
+            content: "",
+          })
+          .end((error, response) => {
+            // expect(error).to.be.null;
+            expect(response).to.have.status(400);
+            done();
+          });
+      });
 
       it("should get one blog by Id", (done) => {
         chai
@@ -107,22 +122,22 @@ describe("BLOG", () => {
       });
     });
 
-    describe("PUT /api/user/blogs/like/:id", () => {
+    describe("PUT /api/blogs/like/:id", () => {
       it("should return 200", (done) => {
         chai
           .request(app)
-          .put(`/api/user/blogs/like/${blogId}`)
+          .put(`/api/blogs/like/${blogId}`)
           .end((error, response) => {
             expect(response).to.have.status(200);
             done();
           });
       });
     });
-    describe("POST /api/user/blogs/comment/:id", () => {
+    describe("POST /api/blogs/comment/:id", () => {
       it("should return 200", (done) => {
         chai
           .request(app)
-          .post(`/api/user/blogs/comment/${blogId}`)
+          .post(`/api/blogs/comment/${blogId}`)
           .send({
             name: "Nosenti",
             text: "It is Innocent",
@@ -147,87 +162,5 @@ describe("BLOG", () => {
     });
   });
 });
-describe("Testing Get blog posts", () => {
-  // it("should return 200", (done) => {
-  //   chai
-  //     .request(app)
-  //     .get("/api/user/blogs")
-  //     .end((error, response) => {
-  //       expect(error).to.be.null;
-  //       expect(response).to.have.status(200);
-  //       done();
-  //     });
-  // });
-  // it("should not update the blog", (done) => {
-  //   chai
-  //     .request(app)
-  //     .patch("/api/user/blogs/hehehe")
-  //     // .set("token", token)
-  //     .end((error, response) => {
-  //       expect(response).to.have.status(404);
-  //       done();
-  //     });
-  // });
-  // it("should return 200", (done) => {
-  //   chai
-  //     .request(app)
-  //     .post("/api/user/blogs")
-  //     // .set("token", token)
-  //     .send({
-  //       title: "My blog post",
-  //       content: "I had been here before",
-  //       image: "https://picsum.photos/600/300",
-  //     })
-  //     .end((error, response) => {
-  //       expect(error).to.be.null;
-  //       expect(response).to.have.status(200);
-  //       blogId = response.body.data._id;
-  //       console.log(blogId);
-  //       done();
-  //     });
-  // });
-  // it("should not create a blog post", (done) => {
-  //   chai
-  //     .request(app)
-  //     .post("/api/user/blogs")
-  //     .set("token", "anyonymours")
-  //     .send({
-  //       title: "My blog post",
-  //       content: "I had been here before",
-  //       image: "https://picsum.photos/600/300",
-  //     })
-  //     .end((err, response) => {
-  //       expect(response).to.have.status(401);
-  //       done();
-  //     });
-  // });
-  // it("It should not create a blog", (done) => {
-  //   chai
-  //     .request(app)
-  //     .post("/api/user/blogs")
-  //     .set("token", "ertohaogphhhhhhhhhhhh35")
-  //     .send({
-  //       title: "",
-  //       content: "",
-  //       image: "",
-  //     })
-  //     .end((err, response) => {
-  //       expect(response).to.have.status(400);
-  //       done();
-  //     });
-  // });
-  // it("should return 200", (done) => {
-  //   chai
-  //     .request(app)
-  //     .post(`/api/user/blogs/comment/${blogId}`)
-  //     .send({
-  //       name: "Nosenti",
-  //       text: "It is Innocent",
-  //     })
-  //     .end((error, response) => {
-  //       expect(error).to.be.null;
-  //       expect(response).to.have.status(200);
-  //       done();
-  //     });
-  // });
-});
+
+// mongodb+srv://nosenti_ing:emma25belle@cluster0.jjdxn.mongodb.net/nosentiDb?retryWrites=true&w=majority

@@ -63,22 +63,13 @@ router.delete(
 );
 
 router.put(
-  "/api/user/blogs/like/:id",
+  "/api/blogs/like/:id",
   routeProtector.authenticateToken,
   blogController.updateLikes
 );
 
-/**
- * @swagger
- * /api/user/blogs/comment/:id:
- *  post:
- *    description: Post a comment on a blog
- *    responses:
- *      '200':
- *        description: A successful response
- */
 router.post(
-  "/api/user/blogs/comment/:id",
+  "/api/blogs/comment/:id",
   validator.commentValidator,
   blogController.createComment
 );
@@ -94,16 +85,16 @@ router.post(
   routeProtector.authenticateToken,
   profileController.createProfile
 );
-router.patch(
-  "/api/user/profile/:id",
-  routeProtector.authenticateToken,
-  profileController.updateProfile
-);
-// router.get(
-//   "/api/user/profile",
+// router.patch(
+//   "/api/user/profile/:id",
 //   routeProtector.authenticateToken,
-//   profileController.readProfile
+//   profileController.updateProfile
 // );
+router.get(
+  "/api/user/profile",
+  routeProtector.authenticateToken,
+  profileController.readProfile
+);
 
 //projects endpoint
 router.put(

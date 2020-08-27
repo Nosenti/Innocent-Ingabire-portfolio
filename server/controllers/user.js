@@ -1,5 +1,5 @@
-const User = require("../models/User");
-const jwt = require("jsonwebtoken");
+import User from "../models/User";
+import jwt from "jsonwebtoken";
 
 exports.login = async (req, res) => {
   try {
@@ -9,7 +9,7 @@ exports.login = async (req, res) => {
       password,
     });
     if (!admin) {
-      return res.send({ msg: "Invalid credentials" });
+      return res.status(400).send({ msg: "Invalid credentials" });
     }
 
     const isMatch = (password, adminpassword) => {
@@ -28,13 +28,15 @@ exports.login = async (req, res) => {
     };
     jwt.sign(payload, "nosenti", (err, token) => {
       if (err) throw err;
-      res.send({ token: token });
+      res.status(200).send({
+        status: "success",
+        token: token,
+      });
     });
 
     if (admin == null)
       return res.status(500).send({ status: "wrong credentials" });
   } catch (error) {
     console.error(error.message);
-    res.status(500).send("Server Error");
   }
 };

@@ -1,24 +1,26 @@
-const Blog = require("../models/Blog");
-const { post } = require("../routes/routes");
-const User = require("../models/User");
+import Blog from "../models/Blog";
+import User from "../models/User";
+require("regenerator-runtime/runtime");
 
 exports.findBlogs = async (req, res) => {
   const blogs = await Blog.find();
-  res.send({ data: blogs });
+  res.status(200).send({
+    data: blogs,
+  });
 };
 
 exports.createBlog = async (req, res) => {
   const blog = new Blog(req.body);
   await blog.save();
-  res.send({ data: blog });
+  return res.status(200).send({ data: blog });
 };
 
 exports.findBlog = async (req, res) => {
   try {
     const blog = await Blog.findById(req.params.id);
-    res.send({ data: blog });
-  } catch {
-    res.status(404).send({ error: "Blog post is not found!" });
+    return res.status(200).send({ data: blog });
+  } catch (error) {
+    return res.status(404).send({ error: "Blog post is not found!" });
   }
 };
 
@@ -27,9 +29,9 @@ exports.updateBlog = async (req, res) => {
     const blog = await Blog.findById(req.params.id);
     Object.assign(blog, req.body);
     blog.save();
-    res.send({ data: blog });
-  } catch {
-    res.status(404).send({ error: "Blog is not found!" });
+    return res.send({ data: blog });
+  } catch (error) {
+    return res.status(404).send({ error: "Blog is not found!" });
   }
 };
 
@@ -37,9 +39,9 @@ exports.deleteBlog = async (req, res) => {
   try {
     const blog = await Blog.findById(req.params.id);
     await blog.remove();
-    res.send({ status: "Blog is deleted" });
-  } catch {
-    res.status(404).send({ error: "Blog is not found!" });
+    return res.status(200).send({ status: "Blog is deleted" });
+  } catch (error) {
+    return res.status(404).send({ error: "Blog is not found!" });
   }
 };
 
@@ -53,10 +55,10 @@ exports.updateLikes = async (req, res) => {
     }
     blog.likes.unshift({ user: req.user.id });
     await blog.save();
-    res.send(blog.likes);
+    return res.status(200).send(blog.likes);
   } catch (error) {
     console.error(error.message);
-    res.status(500).send({ error: "Server Error" });
+    return res.status(500).send({ error: "Server Error" });
   }
 };
 
@@ -73,26 +75,12 @@ exports.createComment = async (req, res) => {
     };
     blog.comments.unshift(newComment);
     await blog.save();
-    res.send({ status: "Comment added" });
+    return res.status(200).send({
+      status: 200,
+      message: "Comment added",
+    });
   } catch (error) {
     console.error(error.message);
-    res.status(500).send({ error: "Server Error" });
+    return res.status(500).send({ error: "Server Error" });
   }
 };
-// exports.deleteComment = async (req, res) => {
-//   try {
-//     // const user = await User.findById(req.user.id).select("-password");
-//     const blog = await Blog.findById(req.params.id);
-//     const comment = blog.comments.find(
-//       (comment) => comment.id === req.params.comment_id
-//     );
-
-//     // Make sure the comment exists
-//     if (!comment) {
-//       res.status(404).send({ status: "Comment not found" });
-//     }
-//   } catch (error) {
-//     console.error(error.message);
-//     res.status(500).send({ error: "Server Error" });
-//   }
-// };

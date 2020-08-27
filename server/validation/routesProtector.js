@@ -7,7 +7,15 @@ const User = require("./../models/User");
 const jwt = require("jsonwebtoken");
 
 exports.authenticateToken = async (req, res, next) => {
-  const token = req.headers.authorization.split(" ")[1];
+  const tokenContent = req.headers.authorization;
+  let token;
+  if (tokenContent != undefined) {
+    token = tokenContent.split(" ")[1];
+  } else {
+    return res.send({
+      message: "No token provided",
+    });
+  }
   if (!token)
     return res.status(401).send({
       status: 401,

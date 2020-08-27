@@ -1,20 +1,22 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const blogController = require("../controllers/blogs");
-const queryController = require("./../controllers/queries");
-const loginController = require("./../controllers/user");
-const profileController = require("./../controllers/profile");
-const validator = require("./../validation/validate");
+import blogController from "../controllers/blogs";
+import queryController from "./../controllers/queries";
+import loginController from "./../controllers/user";
+import profileController from "./../controllers/profile";
+import validator from "./../validation/validate";
+import routeProtector from "./../validation/routesProtector";
 
-const User = require("./../models/User");
-const routeProtector = require("./../validation/routesProtector");
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./../../swagger.json");
 
-// login enpoint
+router.use("/api-docs", swaggerUi.serve);
+router.get("/api-docs", swaggerUi.setup(swaggerDocument));
+
 router.post("/api/user/login", loginController.login),
-  // Queries endpoints
   router.get(
     "/api/user/queries",
-    // routeProtector.protectRoute,
+
     routeProtector.authenticateToken,
     queryController.findQueries
   );
@@ -24,12 +26,20 @@ router.post(
   queryController.createQuery
 );
 router.get(
-  "/api/queries/:id",
+  "/api/user/queries/:id",
   routeProtector.authenticateToken,
   queryController.findQuery
 );
 
-// Blogs endpoints
+/**
+ * @swagger
+ * /api/blogs:
+ *  get:
+ *    description: get a list of all posts
+ *    responses:
+ *      '200':
+ *        description: A successful response
+ */
 
 router.get("/api/blogs", blogController.findBlogs);
 router.get("/api/user/blogs", blogController.findBlogs);
@@ -52,16 +62,14 @@ router.delete(
   blogController.deleteBlog
 );
 
-// update likes
 router.put(
-  "/api/user/blogs/like/:id",
+  "/api/blogs/like/:id",
   routeProtector.authenticateToken,
   blogController.updateLikes
 );
 
-// comments endpoints
 router.post(
-  "/api/user/blogs/comment/:id",
+  "/api/blogs/comment/:id",
   validator.commentValidator,
   blogController.createComment
 );
@@ -77,17 +85,16 @@ router.post(
   routeProtector.authenticateToken,
   profileController.createProfile
 );
-router.patch(
-  "/api/user/profile/:id",
-  routeProtector.authenticateToken,
-  profileController.updateProfile
-);
+// router.patch(
+//   "/api/user/profile/:id",
+//   routeProtector.authenticateToken,
+//   profileController.updateProfile
+// );
 router.get(
   "/api/user/profile",
   routeProtector.authenticateToken,
   profileController.readProfile
 );
-module.exports = router;
 
 //projects endpoint
 router.put(
@@ -100,3 +107,5 @@ router.delete(
   routeProtector.authenticateToken,
   profileController.deleteProject
 );
+
+module.exports = router;

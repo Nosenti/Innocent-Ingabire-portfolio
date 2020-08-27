@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-require("mongoose-type-url");
+import mongoose from "mongoose";
+import "mongoose-type-url";
 
 const schema = mongoose.Schema({
   title: {

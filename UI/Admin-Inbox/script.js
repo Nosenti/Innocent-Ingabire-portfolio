@@ -1,21 +1,5 @@
-// Your web app's Firebase configuration
-var firebaseConfig = {
-  apiKey: "AIzaSyBL6YJVE6Pg6gABRWUL2g12iMDSxIld1EY",
-  authDomain: "innocent-ingabire---portfolio.firebaseapp.com",
-  databaseURL: "https://innocent-ingabire---portfolio.firebaseio.com",
-  projectId: "innocent-ingabire---portfolio",
-  storageBucket: "innocent-ingabire---portfolio.appspot.com",
-  messagingSenderId: "583842392187",
-  appId: "1:583842392187:web:2c9389562ce0f69a651ade",
-  measurementId: "G-4YZ43XFW66",
-};
-// Initialize Firebase
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-}
-firebase.analytics();
+const BASE_URL = "https://mybrand-innocentingabire.herokuapp.com/api";
 
-var messagesRef = firebase.database().ref("messages");
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
@@ -42,9 +26,9 @@ window.onclick = function (e) {
     }
   }
 };
-messagesRef.on("value", getData);
+getData();
 
-function insertNewRecord(name, message, date) {
+function insertNewRecord(name, email, message, date) {
   var messageDiv = document.createElement("div");
   messageDiv.className = "message-inbox";
   var a = document.createElement("a");
@@ -88,35 +72,59 @@ function insertNewRecord(name, message, date) {
   messagesContainer.appendChild(newBlog);
 }
 
-function getData(data) {
-  messages = data.val();
-  var keys = Object.keys(messages);
-  clearBlogs();
-  for (var i = 0; i < keys.length; i++) {
-    var key = keys[i];
-    var name = messages[key].name;
-    var email = messages[key].email;
-    var message = messages[key].message;
-    var date = messages[key].date;
-    insertNewRecord(name, message, date);
+async function getData() {
+  try {
+    let token = localStorage.getItem("token");
+    console.log(token);
+    res = await axios.get(`${BASE_URL}/user/queries`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    const queriesList = res.data;
+    console.log(queriesList);
+
+    queriesList.forEach((query) => {
+      var name = query.name;
+      var email = query.email;
+      var message = query.message;
+      var date = query.createdAt;
+      insertNewRecord(name, email, message, date);
+    });
+  } catch (error) {
+    console.log(error);
   }
 }
+
+// function getData(data) {
+//   messages = data.val();
+//   var keys = Object.keys(messages);
+//   clearBlogs();
+//   for (var i = 0; i < keys.length; i++) {
+//     var key = keys[i];
+//     var name = messages[key].name;
+//     var email = messages[key].email;
+//     var message = messages[key].message;
+//     var date = messages[key].date;
+//     insertNewRecord(name, message, date);
+//   }
+// }
 
 const clearBlogs = () => {
   const messagesContainer = document.querySelector(".messages-container");
   let oldBody = messagesContainer.querySelector("div");
   oldBody.innerHTML = "";
 };
-const auth = firebase.auth();
-const signout = document.getElementById("signout");
-signout.addEventListener("click", () => {
-  auth
-    .signOut()
-    .then(() => {
-      window.location = "./../SignIn-page/index.html";
-      console.log("User signed out successfully !");
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-});
+// const auth = firebase.auth();
+// const signout = document.getElementById("signout");
+// signout.addEventListener("click", () => {
+//   auth
+//     .signOut()
+//     .then(() => {
+//       window.location = "./../SignIn-page/index.html";
+//       console.log("User signed out successfully !");
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//     });
+// });

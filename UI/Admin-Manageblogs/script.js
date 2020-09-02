@@ -1,17 +1,4 @@
-// Your web app's Firebase configuration
-var firebaseConfig = {
-  apiKey: "AIzaSyBL6YJVE6Pg6gABRWUL2g12iMDSxIld1EY",
-  authDomain: "innocent-ingabire---portfolio.firebaseapp.com",
-  databaseURL: "https://innocent-ingabire---portfolio.firebaseio.com",
-  projectId: "innocent-ingabire---portfolio",
-  storageBucket: "innocent-ingabire---portfolio.appspot.com",
-  messagingSenderId: "583842392187",
-  appId: "1:583842392187:web:2c9389562ce0f69a651ade",
-  measurementId: "G-4YZ43XFW66",
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-firebase.analytics();
+const BASE_URL = "https://mybrand-innocentingabire.herokuapp.com/api";
 
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
@@ -65,8 +52,6 @@ function insertNewRecord(data) {
 }
 
 // Data validation in blog forms and firebase connection
-
-var blogsRef = firebase.database().ref("blogs");
 
 const form = document.getElementById("form");
 const title = document.getElementById("title");
@@ -146,14 +131,21 @@ function getTodayDate() {
   return date;
 }
 
-function saveBlogs(title, message, avatar, date) {
-  var autoID = blogsRef.push().key;
-  blogsRef.child(autoID).set({
+function saveBlogs(title, message) {
+  let token = localStorage.getItem("token");
+  const blog = {
     title: title,
-    message: message,
-    avatar: avatar,
-    date: date,
-  });
+    content: message,
+  };
+  axios
+    .post(`${BASE_URL}/user/blogs`, blog, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => {
+      console.log(res);
+    });
 }
 // Elements validity
 
@@ -180,16 +172,16 @@ form.addEventListener("submit", function (e) {
     document.getElementById("form").reset();
   }
 });
-const auth = firebase.auth();
-const signout = document.getElementById("signout");
-signout.addEventListener("click", () => {
-  auth
-    .signOut()
-    .then(() => {
-      window.location = "./../SignIn-page/index.html";
-      console.log("User signed out successfully !");
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-});
+// const auth = firebase.auth();
+// const signout = document.getElementById("signout");
+// signout.addEventListener("click", () => {
+//   auth
+//     .signOut()
+//     .then(() => {
+//       window.location = "./../SignIn-page/index.html";
+//       console.log("User signed out successfully !");
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//     });
+// });

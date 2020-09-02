@@ -1,17 +1,4 @@
-// Your web app's Firebase configuration
-var firebaseConfig = {
-  apiKey: "AIzaSyBL6YJVE6Pg6gABRWUL2g12iMDSxIld1EY",
-  authDomain: "innocent-ingabire---portfolio.firebaseapp.com",
-  databaseURL: "https://innocent-ingabire---portfolio.firebaseio.com",
-  projectId: "innocent-ingabire---portfolio",
-  storageBucket: "innocent-ingabire---portfolio.appspot.com",
-  messagingSenderId: "583842392187",
-  appId: "1:583842392187:web:2c9389562ce0f69a651ade",
-  measurementId: "G-4YZ43XFW66",
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-firebase.analytics();
+const BASE_URL = "https://mybrand-innocentingabire.herokuapp.com/api";
 
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
@@ -41,12 +28,12 @@ window.onclick = function (e) {
 };
 
 // Data validation in blog forms and firebase connection
+let postId;
 
-var blogsRef = firebase.database().ref("blogs");
-
-blogsRef.on("value", getData);
+getData();
 var deleteB;
-function insertNewRecord(title, key, date) {
+function insertNewRecord(key, title, date) {
+  postId = key;
   deleteB = document.createElement("a");
   var editB = document.createElement("a");
   var i = document.createElement("i");
@@ -80,8 +67,20 @@ function insertNewRecord(title, key, date) {
     onDelete(key);
   });
 }
-function onDelete(key) {
-  blogsRef.child(key).remove();
+
+function onDelete() {
+  let token = localStorage.getItem("token");
+  axios
+    .delete(`${BASE_URL}/user/blogs/${postId}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      clearTable();
+      getData();
+    });
 }
 function onEdit() {}
 
@@ -90,18 +89,34 @@ function onEdit() {}
  * I delete all other entries from the table
  * @param {*} data
  */
-function getData(data) {
-  blogs = data.val();
-  var keys = Object.keys(blogs);
-  clearTable();
-  for (var i = 0; i < keys.length; i++) {
-    var key = keys[i];
-    // Look at each fruit object!
-    var title = blogs[key].title;
-    var message = blogs[key].message;
-    var date = blogs[key].date;
-    insertNewRecord(title, key, date);
+async function getData(data) {
+  try {
+    res = await axios.get(`${BASE_URL}/blogs`);
+    const blogsList = res.data.data;
+    console.log(blogsList);
+    clearTable();
+    blogsList.forEach((blog) => {
+      var title = blog.title;
+      // var content = blog.content;
+      var key = blog._id;
+      var date = blog.createdAt;
+      insertNewRecord(key, title, date);
+    });
+  } catch (error) {
+    console.log(error);
   }
+
+  // blogs = data.val();
+  // var keys = Object.keys(blogs);
+  // clearTable();
+  // for (var i = 0; i < keys.length; i++) {
+  //   var key = keys[i];
+  //   // Look at each fruit object!
+  //   var title = blogs[key].title;
+  //   var message = blogs[key].message;
+  //   var date = blogs[key].date;
+  //   insertNewRecord(title, key, date);
+  // }
 }
 
 /**
@@ -112,16 +127,16 @@ const clearTable = () => {
   let oldBody = table.querySelector("tbody");
   oldBody.innerHTML = "";
 };
-const auth = firebase.auth();
-const signout = document.getElementById("signout");
-signout.addEventListener("click", () => {
-  auth
-    .signOut()
-    .then(() => {
-      window.location = "./../SignIn-page/index.html";
-      console.log("User signed out successfully !");
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-});
+// const auth = firebase.auth();
+// const signout = document.getElementById("signout");
+// signout.addEventListener("click", () => {
+//   auth
+//     .signOut()
+//     .then(() => {
+//       window.location = "./../SignIn-page/index.html";
+//       console.log("User signed out successfully !");
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//     });
+// });

@@ -1,20 +1,4 @@
-// Your web app's Firebase configuration
-var firebaseConfig = {
-  apiKey: "AIzaSyBL6YJVE6Pg6gABRWUL2g12iMDSxIld1EY",
-  authDomain: "innocent-ingabire---portfolio.firebaseapp.com",
-  databaseURL: "https://innocent-ingabire---portfolio.firebaseio.com",
-  projectId: "innocent-ingabire---portfolio",
-  storageBucket: "innocent-ingabire---portfolio.appspot.com",
-  messagingSenderId: "583842392187",
-  appId: "1:583842392187:web:2c9389562ce0f69a651ade",
-  measurementId: "G-4YZ43XFW66",
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-firebase.analytics();
-
-var subscribersRef = firebase.database().ref("subscribers");
-var blogsRef = firebase.database().ref("blogs");
+const BASE_URL = "https://mybrand-innocentingabire.herokuapp.com/api";
 
 const form = document.getElementById("form");
 const email = document.getElementById("email");
@@ -93,10 +77,10 @@ form.addEventListener("submit", function (e) {
   }
 });
 
-blogsRef.on("value", getData);
+getData();
 
 var blogsContainer = document.querySelector(".blogs-wrapper");
-function insertNewRecord(avatar, message, date, title) {
+function insertNewRecord(key, title, content, comments) {
   var blogDiv = document.createElement("div");
   var blogTitleDiv = document.createElement("div");
   var blogDetailsDiv = document.createElement("div");
@@ -144,8 +128,11 @@ function insertNewRecord(avatar, message, date, title) {
   a.appendChild(read);
 
   t.innerHTML = title;
-  blogPicDiv.innerHTML = avatar;
-  text.innerHTML = message;
+  // blogPicDiv.innerHTML = avatar;
+  text.innerHTML = content.slice(0, 500);
+
+  a.innerHTML = "Read more >>";
+  a.style.color = "green";
 
   blogDiv.appendChild(t);
   blogDiv.appendChild(blogDatesDiv);
@@ -153,25 +140,37 @@ function insertNewRecord(avatar, message, date, title) {
   blogDiv.appendChild(blogTextDiv);
   blogDiv.appendChild(blogMoreDiv);
 
+  blogMoreDiv.appendChild(blogReadMoreDiv);
+
   // var dots = document.createElement("p");
   // blogDotsDiv.appendChild(dots);
   var newBlog = blogDiv;
-  a.href = "blog.html";
+  a.href = `blog.html#${key}`;
 
   blogsContainer.appendChild(newBlog);
 }
 
-function getData(data) {
-  blogs = data.val();
-  var keys = Object.keys(blogs);
-  // clearBlogs();
-  for (var i = 0; i < keys.length; i++) {
-    var key = keys[i];
-    var avatar = blogs[key].avatar;
-    var date = blogs[key].date;
-    var message = blogs[key].message;
-    var title = blogs[key].title;
-    insertNewRecord(avatar, message, date, title);
+async function getData(res) {
+  try {
+    res = await axios.get(`${BASE_URL}/blogs`);
+    const blogsList = res.data.data;
+    console.log(blogsList);
+
+    blogsList.forEach((blog) => {
+      var title = blog.title;
+      var content = blog.content;
+      var comments = blog.comments;
+      var key = blog._id;
+      insertNewRecord(key, title, content, comments);
+    });
+    // for (let i = 0; i <= blogsList.length; i++) {
+
+    //   console.log(title);
+
+    //   insertNewRecord(title, content, comments);
+    // }
+  } catch (error) {
+    console.log(error);
   }
 }
 

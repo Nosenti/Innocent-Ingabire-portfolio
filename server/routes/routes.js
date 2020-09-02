@@ -13,6 +13,15 @@ const swaggerDocument = require("./../../swagger.json");
 router.use("/api-docs", swaggerUi.serve);
 router.get("/api-docs", swaggerUi.setup(swaggerDocument));
 
+router.use(
+  cors({
+    origin: "*",
+    methods: "GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS",
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+  })
+);
+
 router.post("/api/user/login", loginController.login),
   router.get(
     "/api/user/queries",

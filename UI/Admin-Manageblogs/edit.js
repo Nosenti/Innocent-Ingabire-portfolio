@@ -1,17 +1,4 @@
-// Your web app's Firebase configuration
-var firebaseConfig = {
-  apiKey: "AIzaSyBL6YJVE6Pg6gABRWUL2g12iMDSxIld1EY",
-  authDomain: "innocent-ingabire---portfolio.firebaseapp.com",
-  databaseURL: "https://innocent-ingabire---portfolio.firebaseio.com",
-  projectId: "innocent-ingabire---portfolio",
-  storageBucket: "innocent-ingabire---portfolio.appspot.com",
-  messagingSenderId: "583842392187",
-  appId: "1:583842392187:web:2c9389562ce0f69a651ade",
-  measurementId: "G-4YZ43XFW66",
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-firebase.analytics();
+const BASE_URL = "https://mybrand-innocentingabire.herokuapp.com/api";
 
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
@@ -43,7 +30,8 @@ window.onclick = function (e) {
  * Initiate fetching
  */
 let postId;
-var blogsRef = firebase.database().ref("blogs");
+
+postId = window.location.href.slice(window.location.href.search("#") + 1);
 
 const updateBtn = document.getElementById("edit-btn");
 const form = document.getElementById("form");
@@ -55,14 +43,38 @@ const message = document.getElementById("message-body");
  * Listens to blog save edits and saves them
  */
 updateBtn.addEventListener("click", (e) => {
+  let token = localStorage.getItem("token");
+
   e.preventDefault();
-  const newData = {
-    title: title.value,
-    message: message.value,
-    avatar: avatar.value,
-  };
-  console.log(newData);
-  blogsRef.child(postId).update(newData);
+
+  console.log(`Token before ${token}`);
+
+  axios
+    .patch(
+      `${BASE_URL}/user/blogs/${postId}`,
+      {
+        title: title.value,
+        content: message.value,
+      },
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }
+    )
+    .then((res) => {
+      console.log(res);
+      console.log(token);
+    })
+    .catch((err) => console.error(err));
+  // const newData = {
+  //   title: title.value,
+  //   message: message.value,
+  //   avatar: avatar.value,
+  // };
+  // console.log(newData);
+  // // blogsRef.child(postId).update(newData);
+  // blogsList.child(postId).update(newData);
 });
 /**
  * Takes fetched data and populates them to inputs
@@ -70,36 +82,58 @@ updateBtn.addEventListener("click", (e) => {
  * @param {*} avatar
  * @param {*} message
  */
-function populateInputs(_title, _avatar, _message) {
+function populateInputs(_title, _message) {
   title.value = _title;
-  avatar.value = _avatar;
+  // avatar.value = _avatar;
   message.value = _message;
 }
+console.log(postId);
+async function getData() {
+  try {
+    res = await axios.get(`${BASE_URL}/blogs/${postId}`);
 
-/**
- * Fetch data for a specific post
- * And populte them to their respective inputs
- * @param {*} data
- */
-function getData(data) {
-  data = data.val();
-  data = data[postId];
-  console.log("Got ", data);
-
-  // Look at each fruit object!
-  var titleValue = data.title;
-  var avatarValue = data.avatar;
-  var messageValue = data.message;
-  populateInputs(titleValue, avatarValue, messageValue);
-  console.log(titleValue, messageValue);
+    const blog = res.data.data;
+    console.log(blog);
+    // let data = blogsList.child(postId);
+    // console.log(data);
+    // Look at each fruit object!
+    var titleValue = blog.title;
+    // var avatarValue = blog.avatar;
+    var messageValue = blog.content;
+    populateInputs(titleValue, messageValue);
+    console.log(titleValue, messageValue);
+  } catch (error) {
+    console.log(error);
+  }
 }
+getData();
+
+// /**
+//  * Fetch data for a specific post
+//  * And populte them to their respective inputs
+//  * @param {*} data
+//  */
+// function getData(data) {
+//   data = data.val();
+//   data = data[postId];
+//   console.log("Got ", data);
+
+//   // Look at each fruit object!
+//   var titleValue = data.title;
+//   var avatarValue = data.avatar;
+//   var messageValue = data.message;
+//   populateInputs(titleValue, avatarValue, messageValue);
+//   console.log(titleValue, messageValue);
+// }
 
 /**
  * Window on load
  * We retrieve the id of the post that we should fetch
  *
  */
-window.onload = (e) => {
-  postId = window.location.href.slice(window.location.href.search("#") + 1);
-  blogsRef.orderByKey().equalTo(postId).on("value", getData);
-};
+
+const signout = document.getElementById("signout");
+signout.addEventListener("click", () => {
+  localstorage.removeItem("token");
+  window.location.href = "./../SignIn-page/index.html";
+});

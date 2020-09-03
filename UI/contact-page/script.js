@@ -1,19 +1,4 @@
-// Your web app's Firebase configuration
-var firebaseConfig = {
-  apiKey: "AIzaSyBL6YJVE6Pg6gABRWUL2g12iMDSxIld1EY",
-  authDomain: "innocent-ingabire---portfolio.firebaseapp.com",
-  databaseURL: "https://innocent-ingabire---portfolio.firebaseio.com",
-  projectId: "innocent-ingabire---portfolio",
-  storageBucket: "innocent-ingabire---portfolio.appspot.com",
-  messagingSenderId: "583842392187",
-  appId: "1:583842392187:web:2c9389562ce0f69a651ade",
-  measurementId: "G-4YZ43XFW66",
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-firebase.analytics();
-
-var messagesRef = firebase.database().ref("messages");
+const BASE_URL = "https://mybrand-innocentingabire.herokuapp.com/api";
 
 const form = document.getElementById("form");
 const email = document.getElementById("email");
@@ -88,12 +73,13 @@ function getTodayDate() {
 }
 
 function saveMessages(name, email, message) {
-  var newMessageRef = messagesRef.push();
-  newMessageRef.set({
+  const query = {
     name: name,
     email: email,
     message: message,
-    date: getTodayDate(),
+  };
+  axios.post(`${BASE_URL}/queries`, query).then((res) => {
+    console.log(res);
   });
 }
 // Elements validity

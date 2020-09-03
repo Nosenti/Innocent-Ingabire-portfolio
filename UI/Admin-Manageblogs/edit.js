@@ -47,18 +47,19 @@ updateBtn.addEventListener("click", (e) => {
 
   e.preventDefault();
 
+  console.log(`Token before ${token}`);
+
   axios
     .patch(
       `${BASE_URL}/user/blogs/${postId}`,
       {
+        title: title.value,
+        content: message.value,
+      },
+      {
         headers: {
           authorization: `Bearer ${token}`,
         },
-      },
-
-      {
-        title: title.value,
-        message: message.value,
       }
     )
     .then((res) => {
@@ -130,3 +131,9 @@ getData();
  * We retrieve the id of the post that we should fetch
  *
  */
+
+const signout = document.getElementById("signout");
+signout.addEventListener("click", () => {
+  localstorage.removeItem("token");
+  window.location.href = "./../SignIn-page/index.html";
+});

@@ -56,3 +56,9 @@ function loadSubscribers() {
   subscriptionSection.style.display = "block";
   indicator.style.transform = "translateX(100px)";
 }
+
+const signout = document.getElementById("signout");
+signout.addEventListener("click", () => {
+  localstorage.removeItem("token");
+  window.location.href = "./../SignIn-page/index.html";
+});

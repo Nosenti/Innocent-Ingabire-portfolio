@@ -172,16 +172,9 @@ form.addEventListener("submit", function (e) {
     document.getElementById("form").reset();
   }
 });
-// const auth = firebase.auth();
-// const signout = document.getElementById("signout");
-// signout.addEventListener("click", () => {
-//   auth
-//     .signOut()
-//     .then(() => {
-//       window.location = "./../SignIn-page/index.html";
-//       console.log("User signed out successfully !");
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//     });
-// });
+
+const signout = document.getElementById("signout");
+signout.addEventListener("click", () => {
+  localstorage.removeItem("token");
+  window.location.href = "./../SignIn-page/index.html";
+});

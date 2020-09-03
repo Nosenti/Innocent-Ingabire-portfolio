@@ -81,14 +81,19 @@ async function getData() {
         authorization: `Bearer ${token}`,
       },
     });
-    const queriesList = res.data;
+    const queriesList = res.data.data;
     console.log(queriesList);
-
+    console.log(
+      queriesList[0].name,
+      queriesList[0].email,
+      queriesList[0].message,
+      queriesList[0]
+    );
     queriesList.forEach((query) => {
       var name = query.name;
       var email = query.email;
       var message = query.message;
-      var date = query.createdAt;
+      var date = query.created;
       insertNewRecord(name, email, message, date);
     });
   } catch (error) {
@@ -115,16 +120,9 @@ const clearBlogs = () => {
   let oldBody = messagesContainer.querySelector("div");
   oldBody.innerHTML = "";
 };
-// const auth = firebase.auth();
-// const signout = document.getElementById("signout");
-// signout.addEventListener("click", () => {
-//   auth
-//     .signOut()
-//     .then(() => {
-//       window.location = "./../SignIn-page/index.html";
-//       console.log("User signed out successfully !");
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//     });
-// });
+
+const signout = document.getElementById("signout");
+signout.addEventListener("click", () => {
+  localstorage.removeItem("token");
+  window.location.href = "./../SignIn-page/index.html";
+});

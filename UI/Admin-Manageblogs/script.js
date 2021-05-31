@@ -155,7 +155,7 @@ form.addEventListener("submit", function (e) {
   if (
     // checkRequired([name, email, message]) &&
     checkLength(title, 3, 80) &&
-    checkLength(message, 6, 4000)
+    checkLength(message, 6, 50000)
   ) {
     // save message to database
     saveBlogs(title.value, message.value, avatar.value, getTodayDate());

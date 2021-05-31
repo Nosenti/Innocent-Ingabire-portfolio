@@ -491,3 +491,21 @@ body {
   -ms-transform: rotate(-135deg);
   -o-transform: rotate(-135deg);
 }
+
+.stacks {
+  
+}
+
+.stacks ul {
+  display: flex;
+  list-style: none;
+  
+}
+
+.stacks ul li{
+  margin-right: 1rem;
+}
+
+.stacks ul li a{
+  color: #999;
+}
